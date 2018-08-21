@@ -69,7 +69,7 @@ Il sera également possible de trier (uniquement à l'affichage) les tâches par
 
 Fenêtre d'édition afin d'ajouter, modifier et supprimer des personnes au projet. Une personne possèdera un nom et une couleur.
 
-Maquette
+![Affichage de l'équipe et popup d'ajout/modification d'une personne](img/Persons-View-Popup.png)
 
 ## Créer une liste de tâches
 
@@ -80,7 +80,7 @@ Fenêtre d'édition des tâches du projet. Les tâches ont plusieurs données te
 - Date de début et de fin
 - Status (terminé / pas terminé)
 
-Maquette
+![Popup d'ajout/modification d'une tâche](img/popup-task.png)
 
 ## Sauvegarder dans un fichier
 
