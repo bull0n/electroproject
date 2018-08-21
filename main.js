@@ -10,7 +10,7 @@ const {app, BrowserWindow} = require('electron')
     //win.setMenu(null);
 
     // and load the index.html of the app.
-    win.loadFile('index.html')
+    win.loadFile('views/tab-view/tab-view.html')
 
     // Emitted when the window is closed.
     win.on('closed', () => {
