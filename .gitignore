@@ -3,8 +3,6 @@ bower_components
 node_modules
 dist
 
-#doc
-doc/img
 
 #files
 *.tgz
