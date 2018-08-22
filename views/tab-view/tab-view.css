@@ -1,0 +1,30 @@
+#tabs
+{
+  padding: 0;
+  margin: 0;
+}
+
+.tab
+{
+  display : inline-block;
+  width: 250px;
+  border: 1px solid black;
+  text-align: center;
+  padding: 4px;
+}
+
+.tab-content
+{
+  padding-top: 20px;
+  display : none;
+}
+
+.active-content 
+{
+  display: block;
+}
+
+.active-tab
+{
+  color: red;
+}

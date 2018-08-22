@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="tab-view.css">
+<script src="tab-view.js"></script>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function(event) {
+    let tabView = new TabView();
+    tabView.addFile('salut');
+    tabView.addFile('Bonjour');
+  });
+</script>
+
+<ul id="tabs">
+</ul>
+<div id="test" class="tab-content">
+  Bonjour
+</div>
+<div id="tab-content">
+</div>
