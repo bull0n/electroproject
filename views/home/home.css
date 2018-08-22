@@ -1,0 +1,22 @@
+
+#div-main-menu
+{
+  display: flex;
+  flex-direction: column;
+
+  /* Center verticaly*/
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.btn-main-menu
+{
+  display: block;
+  width: 256px;
+  height: 64px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
