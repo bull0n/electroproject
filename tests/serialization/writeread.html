@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Serilization - Write and Read</Title>
+  </head>
+  <body>
+    <script src="../../tools/serializertool.js"></script>
+    <script src="../../data/member.js"></script>
+    <script>
+    let member = new Member();
+    member.name = "Jean";
+    member.color = "#ffe200";
+
+    let path = "tests/serialization/test.epd";
+    SerializerTool.serializeToFile(member, path);
+    let obj = SerializerTool.unserializeFromFile(path);
+
+    document.write(JSON.stringify(obj));
+    </script>
+  </body>
+</html>
