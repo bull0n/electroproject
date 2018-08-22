@@ -17,9 +17,11 @@
 {
   padding-top: 20px;
   display : none;
+  background-color: gray;
+  height: 100%;
 }
 
-.active-content 
+.active-content
 {
   display: block;
 }

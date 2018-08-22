@@ -31,7 +31,7 @@ https://en.wikipedia.org/wiki/Electron_(software_framework)
 
 ## Lien de la forge
 
- - https://salut.ch
+ - https://github.com/bull0n/electroproject
 
 # Fonctionnalités essentielles
 
@@ -42,6 +42,8 @@ Cette liste de tâches est les tâches qui devront être faites pour remplir les
 Lorsque le programme est ouvert, il va ouvrir le dernier fichier ouvert. S'il n'y en a pas ou que le fichier n'existe plus. Il y aura un écran très simple avec 3 boutons, Nouveau, Ouvrir et Quitter.
 
 ![Menu principal](img/main-screen.png)
+
+\clearpage
 
 ## Projet
 
@@ -61,15 +63,21 @@ Il sera également possible de trier (uniquement à l'affichage) les tâches par
 
 ![Affichage du diagramme](img/diagram.png)
 
+\clearpage
+
 ### Liste de tâches
 
 ![Affichage de liste des tâches](img/list-tasks.png)
+
+\clearpage
 
 ## Equipe
 
 Fenêtre d'édition afin d'ajouter, modifier et supprimer des personnes au projet. Une personne possèdera un nom et une couleur.
 
 ![Affichage de l'équipe et popup d'ajout/modification d'une personne](img/Persons-View-Popup.png)
+
+\clearpage
 
 ## Créer une liste de tâches
 
