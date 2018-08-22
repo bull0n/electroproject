@@ -63,3 +63,7 @@ function makeActive(idTab)
   let idContent = idTab.replace(ID_TAB_PREFIX, ID_CONTENT_PREFIX);
   document.getElementById(idContent).className += ACTIVE_CONTENT_CLASS;
 }
+
+let tabView = new TabView();
+tabView.addFile('salut');
+tabView.addFile('Bonjour');

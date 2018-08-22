@@ -1,5 +1,3 @@
-window.$ = window.jQuery = require('jquery');
-
 $(document).ready(function()
 {
   $('#test').click(function()
