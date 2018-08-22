@@ -1,7 +1,4 @@
-import { Member } from './member.js';
-import { Task } from './task.js';
-
-export class Task
+class Task
 {
   constructor()
   {

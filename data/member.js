@@ -1,4 +1,4 @@
-export class Member
+class Member
 {
   constructor()
   {

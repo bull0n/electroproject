@@ -1,4 +1,4 @@
-export class Project
+class Project
 {
   constructor()
   {
