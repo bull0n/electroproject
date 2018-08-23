@@ -1,8 +1,6 @@
-
-function generateMembersTableFromFile()
+function generateMembersTable(membersArray)
 {
   let membersTableBody = document.getElementById("tbl_members").getElementsByTagName("tbody")[0];
-  let membersArray = SerializerTool.unserializeFromFile("./team.epd");
 
   for(i = 0;i < membersArray.length; i++)
   {
@@ -37,6 +35,5 @@ function generateMembersData()
   SerializerTool.serializeToFile(members, path);
 }
 
-//generateMembersData();
-
-generateMembersTableFromFile();
+let membersArray = SerializerTool.unserializeFromFile("./team.epd");
+generateMembersTable(membersArray);
