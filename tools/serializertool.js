@@ -7,10 +7,10 @@ class SerializerTool
   */
   static serializeToFile(object, filename)
   {
-    let filesystem = require("fs");
+    let fileSystem = require("fs");
     let serializedObject = JSON.stringify(object);
 
-    filesystem.writeFileSync(filename, serializedObject);
+    fileSystem.writeFileSync(filename, serializedObject);
   }
 
   /**
@@ -20,8 +20,20 @@ class SerializerTool
   */
   static unserializeFromFile(filename)
   {
-    let filesystem = require("fs");
-    let serializedObject = filesystem.readFileSync(filename)
+    let fileSystem = require("fs");
+    let serializedObject = null;
+
+    if(filename === "")
+    {
+      throw "ERROR: The filename is null or the name is empty";
+    }
+
+    if(!fileSystem.existsSync(filename))
+    {
+      throw "ERROR: The file is not loadable or does not exist";
+    }
+
+    serializedObject = fileSystem.readFileSync(filename)
 
     return JSON.parse(serializedObject);
   }
