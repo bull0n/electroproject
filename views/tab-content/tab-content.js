@@ -46,3 +46,5 @@ addView('Tasks', '<i class="fas fa-tasks"></i>', '');
 addView('Team', '<i class="fas fa-users"></i>', '');
 
 addAction('Save', '<i class="fas fa-save"></i>', function() {console.log('hello world');});
+
+$('#'+ views[0].getIdButton()).click();
