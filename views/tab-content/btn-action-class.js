@@ -8,7 +8,7 @@ class ButtonAction
 
   getButtonDisplay()
   {
-    return `<div id="${this.getIdButton()}" class="btn-content btn-action"><p>${this.name.charAt(0).toUpperCase()}</p></div>`;
+    return `<div id="${this.getIdButton()}" class="btn-content btn-action"><p>${this.icon}</p></div>`;
   }
 
   getIdButton()

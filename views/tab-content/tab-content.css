@@ -27,9 +27,15 @@
   flex-direction: column;
   justify-content: center;
 }
+
 .btn-content > p
 {
   margin: 0;
+}
+
+.btn-content > p > i
+{
+  font-size : 26px;
 }
 
 .view
