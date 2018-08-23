@@ -30,8 +30,19 @@ function addView(name, icon, htmlFile)
   views.push(view);
 }
 
+function addAction(name, icon, actionFunction)
+{
+  let btnAction = new ButtonAction(name, icon);
+
+  $('#left-button').append(btnAction.getButtonDisplay());
+
+  $('#' + btnAction.getIdButton()).click(actionFunction);
+}
+
 let views = [];
 
 addView('Diagram', '', '');
 addView('Tasks', '', '');
 addView('Team', '', '');
+
+addAction('Save', '', function() {console.log('hello world');});
