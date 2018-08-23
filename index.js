@@ -4,5 +4,5 @@ require("bootstrap");
 
 $(document).ready(function()
 {
-  $('body').load('tests/modal/simplemodal.html');
+  $('body').load('views/home/home.html');
 });
