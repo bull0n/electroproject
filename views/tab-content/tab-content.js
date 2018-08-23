@@ -41,8 +41,8 @@ function addAction(name, icon, actionFunction)
 
 let views = [];
 
-addView('Diagram', '', '');
-addView('Tasks', '', '');
-addView('Team', '', '');
+addView('Diagram', '<i class="fas fa-equals"></i>', '');
+addView('Tasks', '<i class="fas fa-tasks"></i>', '');
+addView('Team', '<i class="fas fa-users"></i>', '');
 
-addAction('Save', '', function() {console.log('hello world');});
+addAction('Save', '<i class="fas fa-save"></i>', function() {console.log('hello world');});
