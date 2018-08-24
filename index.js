@@ -1,4 +1,4 @@
 $(document).ready(function()
 {
-  $('body').load('views/tab-content/tab-content.html');
+  $('body').load('views/home/home.html');
 });
