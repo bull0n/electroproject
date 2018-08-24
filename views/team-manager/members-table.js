@@ -1,3 +1,6 @@
+// Imports
+var Modal = require('./views/modal/modal-class.js');
+
 function generateMembersTable(membersArray)
 {
   let membersTableBody = document.getElementById("tbl_members").getElementsByTagName("tbody")[0];
@@ -27,7 +30,7 @@ function generateMembersData()
 
   let member2 = new Member();
   member2.name = "Jeanne";
-  member2.color = "#eee200";
+  member2.color = "#000200";
 
   let members = [member1, member2];
 
@@ -35,5 +38,19 @@ function generateMembersData()
   SerializerTool.serializeToFile(members, path);
 }
 
+// Logic ...
+//generateMembersData();
 let membersArray = SerializerTool.unserializeFromFile("./team.epd");
 generateMembersTable(membersArray);
+
+// Actions on the page
+$(document).ready(function()
+{
+  $("#btn-add-member").click(function(){
+      Modal.load('modal-new-member', 'New member', './views/team-manager/members-table.html');
+  });
+
+  $("#btn-modify-member").click(function(){
+      Modal.load('modal-modify-member', 'Modify member', './views/team-manager/members-table.html');
+  });
+});
