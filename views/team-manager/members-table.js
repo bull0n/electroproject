@@ -43,14 +43,18 @@ function generateMembersData()
 let membersArray = SerializerTool.unserializeFromFile("./team.epd");
 generateMembersTable(membersArray);
 
+// Load the modals
+Modal.load('modal-new-member', 'New member', './views/home/home.html');
+Modal.load('modal-modify-member', 'Modify member', './views/home/home.html');
+
 // Actions on the page
 $(document).ready(function()
 {
   $("#btn-add-member").click(function(){
-      Modal.load('modal-new-member', 'New member', './views/team-manager/members-table.html');
+      $('#modal-new-member').modal('show');
   });
 
   $("#btn-modify-member").click(function(){
-      Modal.load('modal-modify-member', 'Modify member', './views/team-manager/members-table.html');
+      $('#modal-modify-member').modal('show');
   });
 });

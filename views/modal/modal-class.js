@@ -8,13 +8,7 @@ class Modal
         $('#centered-modal').attr("id", modalIdTag);
         $('.modal-title').text(title);
         $('.modal-body').load(contentFilename);
-
-        $('#' + modalIdTag).modal('show');
       });
-
-      //$(divTag).load('./views/modal/modal.html');
-      //$('.modal-title').text(title);
-      //$('.modal-body').load(contentFilename);
     }
 }
 
