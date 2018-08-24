@@ -1,18 +1,30 @@
-function createTabContent(prefix, divIdTarget)
+let Member = require('../../../data/member.js');
+let Task = require('../../../data/task.js');
+let Project = require('../../../data/project.js');
+
+class TabContent
 {
-  var {displayView, addView, addAction, createBasicStructure, views} = require('./create-tab.js');
+  constructor(fileName)
+  {
+    this.project = new Project();
+  }
 
-  views[prefix] = [];
+  createTabContent(prefix, divIdTarget)
+  {
+    var {displayView, addView, addAction, createBasicStructure, views} = require('./create-tab.js');
 
-  createBasicStructure(prefix, divIdTarget);
+    views[prefix] = [];
 
-  addView(prefix, 'Diagram', '<i class="fas fa-equals"></i>', '');
-  addView(prefix, 'Tasks', '<i class="fas fa-tasks"></i>', '');
-  addView(prefix, 'Team', '<i class="fas fa-users"></i>', '');
+    createBasicStructure(prefix, divIdTarget);
 
-  addAction(prefix, 'Save', '<i class="fas fa-save"></i>', function() { console.log('hello world'); });
+    addView(prefix, 'Diagram', '<i class="fas fa-equals"></i>', '');
+    addView(prefix, 'Tasks', '<i class="fas fa-tasks"></i>', '');
+    addView(prefix, 'Team', '<i class="fas fa-users"></i>', '');
 
-  $('#'+ views[prefix][0].getIdButton()).click();
+    addAction(prefix, 'Save', '<i class="fas fa-save"></i>', function() { console.log('hello world'); });
+
+    $('#'+ views[prefix][0].getIdButton()).click();
+  }
 }
 
-module.exports = createTabContent
+module.exports = TabContent;

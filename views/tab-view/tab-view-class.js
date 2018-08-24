@@ -36,8 +36,10 @@ class TabView
     divContent.id = 'content-' + fileNameLower;
     this.divsContent.appendChild(divContent);
 
-    let createTabContent = require('./views/tab-view/tab-content/tab-content.js');
-    createTabContent(fileNameLower, divContent.id);
+    let TabContent = require('./views/tab-view/tab-content/tab-content.js');
+
+    let tabContent = new TabContent('');
+    tabContent.createTabContent(fileNameLower, divContent.id);
 
     listTab.push(fileName);
 
