@@ -38,3 +38,5 @@ class SerializerTool
     return JSON.parse(serializedObject);
   }
 }
+
+module.exports = SerializerTool;

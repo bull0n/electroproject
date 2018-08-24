@@ -1,5 +1,6 @@
 // Imports
-var Modal = require('./views/modal/modal-class.js');
+let SerializerTool = require('./tools/serializertool.js');
+let Modal = require('./views/modal/modal-class.js');
 
 function generateMembersTable(membersArray)
 {
