@@ -1,14 +1,15 @@
 class View
 {
-  constructor(name, icon)
+  constructor(name, prefix, icon)
   {
     this.name = name;
+    this.prefix = prefix;
     this.icon = icon;
   }
 
   getButtonDisplay()
   {
-    return `<div id="${this.getIdButton()}" class="btn-content btn-view"><p>${this.icon}</p></div>`;
+    return `<div id="${this.getIdButton()}" class="btn-content btn-view" data-prefix="${this.prefix}"><p>${this.icon}</p></div>`;
   }
 
   getContentDiv()
@@ -26,3 +27,5 @@ class View
     return this.name.toLowerCase() + '-btn';
   }
 }
+
+module.exports = View;
