@@ -6,9 +6,10 @@ let Modal = require('./views/modal/modal-class.js')
 
 class ListMembers extends AbstractView
 {
-  constructor(idDiv, project)
+  constructor(element, project)
   {
-    super(iDiv, project);
+    super(element);
+    this.project = project;
     this.listMembers = this.project.team;
   }
 
