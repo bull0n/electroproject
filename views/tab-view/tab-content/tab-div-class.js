@@ -1,11 +1,10 @@
-class View
+class TabDiv
 {
-  constructor(name, prefix, icon, content)
+  constructor(name, prefix, icon)
   {
     this.name = name;
     this.prefix = prefix;
     this.icon = icon;
-    this.content = content
   }
 
   getButtonDisplay()
@@ -15,7 +14,7 @@ class View
 
   getContentDiv()
   {
-    return `<div id="${this.getIdContentDiv()}" class="view">${this.content}</div>`;
+    return `<div id="${this.getIdContentDiv()}" class="view"></div>`;
   }
 
   getIdContentDiv()
@@ -29,4 +28,4 @@ class View
   }
 }
 
-module.exports = View;
+module.exports = TabDiv;

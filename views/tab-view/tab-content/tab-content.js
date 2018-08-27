@@ -73,11 +73,9 @@ class TabContent
 
     createBasicStructure(prefix, divIdTarget);
 
-    let listTasks = new ListTasks(this.project);
-
-    addView(prefix, 'Diagram', '<i class="fas fa-equals"></i>', '');
-    addView(prefix, 'Tasks', '<i class="fas fa-tasks"></i>', listTasks.getView());
-    addView(prefix, 'Team', '<i class="fas fa-users"></i>', '');
+    addView(prefix, 'Diagram', '<i class="fas fa-equals"></i>', ListTasks, this.project);
+    addView(prefix, 'Tasks', '<i class="fas fa-tasks"></i>', ListTasks, this.project);
+    addView(prefix, 'Team', '<i class="fas fa-users"></i>', ListTasks, this.project);
 
     addAction(prefix, 'Save', '<i class="fas fa-save"></i>', function() { console.log('hello world'); });
 

@@ -1,5 +1,5 @@
 var ButtonAction = require('./btn-action-class.js');
-var View = require('./view-class.js');
+var TabDiv = require('./tab-div-class.js');
 
 var views = {};
 
@@ -15,23 +15,25 @@ function displayView(event)
 
   let element = event.currentTarget;
 
-  element.className += ' active-btn-view'
+  element.className += ' active-btn-view';
 
   let viewId = element.id.replace('-btn', '-view');
-
   document.getElementById(viewId).className += ' active-view';
 }
 
-function addView(prefix, name, icon, content)
+function addView(prefix, name, icon, ClassView, project)
 {
-  let view = new View(prefix+'-'+name, prefix, icon, content);
+  let tabDiv = new TabDiv(prefix+'-'+name, prefix, icon);
+  let idDiv = `${prefix}-content`;
 
-  $(`#${prefix}-left-button`).append(view.getButtonDisplay());
-  $(`#${prefix}-content`).append(view.getContentDiv());
+  $(`#${prefix}-left-button`).append(tabDiv.getButtonDisplay());
+  $('#'+idDiv).append(tabDiv.getContentDiv());
+  $('#' + tabDiv.getIdButton()).click(displayView);
 
-  $('#' + view.getIdButton()).click(displayView);
+  let view = new ClassView(project, tabDiv.getIdContentDiv());
+  view.display();
 
-  views[prefix].push(view);
+  views[prefix].push(tabDiv);
 }
 
 function addAction(prefix, name, icon, actionFunction)

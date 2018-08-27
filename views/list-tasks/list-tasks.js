@@ -1,14 +1,15 @@
+let AbstractView = require('../../abstract-view-class.js');
 let {Project, Task, Member} = require('../../data/project.js');
 
-class ListTasks
+class ListTasks extends AbstractView
 {
-  constructor(project)
+  constructor(idDiv, project)
   {
-    this.project = project;
-    this.listTasks = project.tasks;
+    super(idDiv, project);
+    this.listTasks = this.project.tasks;
   }
 
-  getView()
+  display()
   {
     let htmlText = `
       <h3>Tasks</h3>
@@ -21,15 +22,23 @@ class ListTasks
             <th scope="col">From</th>
             <th scope="col">To</th>
             <th scope="col">Finished ?</th>
+            <th scope="col"></th>
           </tr>
         </thead>
         <tbody>
           ${this.getHTMLLists()}
         </tbody>
       </table>
+
+      <div class="action-btn-list-tasks">
+        <button type="button" id="${this.project.name.toLowerCase()}-add-task" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Add a task
+        </button>
+      </div>
     `;
 
-    return htmlText;
+    $('#'+this.idDiv).html(htmlText);
+    this.addEvent();
   }
 
   getHTMLLists()
@@ -63,10 +72,26 @@ class ListTasks
             <label class="custom-control-label" for="customCheckDisabled">Finished</label>
           </div>
         </td>
+        <td>
+          <button class="btn btn-link btn-delete-task" data-task-id=""><i class="fas fa-trash" data-task=""></i></button>
+        </td>
       </tr>`;
     }
 
     return htmlText;
+  }
+
+  addEvent()
+  {
+    $('.btn-delete-task').click(function(event)
+    {
+      console.log('test');
+    });
+
+    $(`#${this.project.name.toLowerCase()}-add-task`).click(function(event)
+    {
+      console.log('test2');
+    });
   }
 }
 
