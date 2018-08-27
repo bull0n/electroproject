@@ -1,10 +1,11 @@
 class View
 {
-  constructor(name, prefix, icon)
+  constructor(name, prefix, icon, content)
   {
     this.name = name;
     this.prefix = prefix;
     this.icon = icon;
+    this.content = content
   }
 
   getButtonDisplay()
@@ -14,7 +15,7 @@ class View
 
   getContentDiv()
   {
-    return `<div id="${this.getIdContentDiv()}" class="view"></div>`;
+    return `<div id="${this.getIdContentDiv()}" class="view">${this.content}</div>`;
   }
 
   getIdContentDiv()

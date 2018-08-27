@@ -22,15 +22,12 @@ function displayView(event)
   document.getElementById(viewId).className += ' active-view';
 }
 
-function addView(prefix, name, icon, htmlFile)
+function addView(prefix, name, icon, content)
 {
-  let view = new View(prefix+'-'+name, prefix, icon);
+  let view = new View(prefix+'-'+name, prefix, icon, content);
 
   $(`#${prefix}-left-button`).append(view.getButtonDisplay());
   $(`#${prefix}-content`).append(view.getContentDiv());
-
-  //$(view.getIdContentDiv).load(htmlFile); //final function
-  $('#' + view.getIdContentDiv()).append(name); //temp
 
   $('#' + view.getIdButton()).click(displayView);
 
