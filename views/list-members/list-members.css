@@ -1,0 +1,23 @@
+#div-team-edition
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: auto;
+}
+
+.btn-team-edition
+{
+  width: 100%;
+  height: 32px;
+}
+
+#tbl_column_color
+{
+  width: 25%;
+}
+
+#tbl_column_name
+{
+  width: 75%;
+}
