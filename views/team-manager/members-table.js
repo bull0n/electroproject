@@ -15,11 +15,6 @@ function generateMembersTable(membersArray)
 
     colorCell.style.backgroundColor = member.color;
     nameCell.innerHTML = member.name;
-
-    row.onclick = function()
-    {
-      console.log(member.name);
-    };
   }
 }
 
@@ -40,22 +35,41 @@ function generateMembersData()
 }
 
 // Logic ...
-//generateMembersData();
 let membersArray = SerializerTool.unserializeFromFile("./team.epd");
 generateMembersTable(membersArray);
 
-// Load the modals
-Modal.load('modal-new-member', 'New member', './views/home/home.html');
-Modal.load('modal-modify-member', 'Modify member', './views/home/home.html');
+// Insert the modal
+Modal.load('member-edit-modal');
 
 // Actions on the page
 $(document).ready(function()
 {
-  $("#btn-add-member").click(function(){
-      $('#modal-new-member').modal('show');
+  $("#btn-add-member").click(function()
+  {
+      Modal.prepare('New Member', './views/team-manager/member_form.html');
+
+      $(document).ready(function(){
+        $('#member-edit-modal').modal('show');
+      });
   });
 
-  $("#btn-modify-member").click(function(){
-      $('#modal-modify-member').modal('show');
+  $("#btn-modify-member").click(function()
+  {
+      Modal.prepare('Modify Member', './views/team-manager/member_form.html');
+
+      $(document).ready(function(){
+        let elementsMap = new Map();
+        elementsMap.set("#cp_member_color");
+        elementsMap.set("#txt_member_name", "George");
+
+        Modal.setValues(elementsMap);
+        $('#member-edit-modal').modal('show');
+      });
+
+      $('table tbody tr').click(function(){
+        $(this).css('background-color', 'Green');
+      });
   });
+
+
 });
