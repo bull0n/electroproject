@@ -4,5 +4,5 @@ require("bootstrap");
 
 $(document).ready(function()
 {
-  $('body').load('views/home/home.html');
+  $('body').load('views/tab-view/tab-view.html');
 });

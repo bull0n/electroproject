@@ -7,3 +7,5 @@ class Project
     this.tasks = [];
   }
 }
+
+module.exports = Project;
