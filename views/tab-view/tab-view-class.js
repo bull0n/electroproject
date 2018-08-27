@@ -1,7 +1,5 @@
 var listTab = [];
 
-
-
 class TabView
 {
   constructor()
@@ -36,7 +34,7 @@ class TabView
     divContent.id = 'content-' + fileNameLower;
     this.divsContent.appendChild(divContent);
 
-    let TabContent = require('./views/tab-view/tab-content/tab-content.js');
+    let TabContent = require('./views/tab-content/tab-content.js');
 
     let tabContent = new TabContent('');
     tabContent.createTabContent(fileNameLower, divContent.id);

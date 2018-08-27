@@ -1,5 +1,5 @@
-let {Project, Task, Member} = require('../../../data/project.js');
-let ListTasks = require('../../list-tasks/list-tasks.js');
+let {Project, Task, Member} = require('../../data/project.js');
+let ListTasks = require('../list-tasks/list-tasks.js');
 
 class TabContent
 {
