@@ -6,3 +6,5 @@ class Member
     this.color = '';
   }
 }
+
+module.exports = Member;

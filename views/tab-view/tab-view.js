@@ -8,7 +8,7 @@ const ID_CONTENT_PREFIX = 'content-';
 //add tab for testing
 let tabView = new TabView();
 tabView.addFile('salut');
-tabView.addFile('Bonjour');
+// tabView.addFile('Bonjour');
 
 //adapt the height of the div to the full width
 $(window).resize(function()

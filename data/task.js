@@ -10,3 +10,5 @@ class Task
     this.finished = false;
   }
 }
+
+module.exports = Task;
