@@ -6,6 +6,63 @@ class TabContent
   constructor(fileName)
   {
     this.project = new Project();
+
+    this.project = {
+      name : 'test',
+      filename : '/home/lucas/blabla',
+      team : [
+        {
+          name: 'Lucas',
+          color: 'black',
+        },
+        {
+          name: 'Malik',
+          color: 'Red',
+        }
+      ],
+      tasks : [
+        {
+          name : 'tâche 1',
+          from : new Date(),
+          to : new Date(),
+          inCharge : {
+            name: 'Lucas',
+            color: 'black'
+          },
+          workingOn : [
+            {
+              name: 'Lucas',
+              color: 'black',
+            },
+            {
+              name: 'Malik',
+              color: 'Red',
+            }
+          ],
+          finished : true
+        },
+        {
+          name : 'tâche 2',
+          from : new Date(),
+          to : new Date(),
+          inCharge : {
+            name: 'Lucas',
+            color: 'black'
+          },
+          workingOn : [
+            {
+              name: 'Lucas',
+              color: 'black',
+            },
+            {
+              name: 'Malik',
+              color: 'Red',
+            }
+          ],
+          finished : false
+        }
+      ]
+    }
   }
 
   createTabContent(prefix, divIdTarget)
