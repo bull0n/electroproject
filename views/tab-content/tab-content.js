@@ -1,7 +1,8 @@
+let AbstractView = require('./abstract-view-class.js');
 let {Project, Task, Member} = require('../../data/project.js');
 let ListTasks = require('../list-tasks/list-tasks.js');
 
-class TabContent
+class TabContent extends AbstractView
 {
   constructor(fileName)
   {

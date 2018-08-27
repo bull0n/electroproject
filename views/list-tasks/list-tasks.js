@@ -5,7 +5,8 @@ class ListTasks extends AbstractView
 {
   constructor(idDiv, project)
   {
-    super(idDiv, project);
+    super(idDiv);
+    this.project = project
     this.listTasks = this.project.tasks;
   }
 

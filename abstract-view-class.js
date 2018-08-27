@@ -1,8 +1,7 @@
 class AbstractView
 {
-  constructor(project, idDiv)
+  constructor(idDiv)
   {
-    this.project = project;
     this.idDiv = idDiv;
   }
 
