@@ -3,9 +3,9 @@ let {Project, Task, Member} = require('../../data/project.js');
 
 class ListTasks extends AbstractView
 {
-  constructor(idDiv, project)
+  constructor(element, project)
   {
-    super(idDiv);
+    super(element);
     this.project = project
     this.listTasks = this.project.tasks;
   }
@@ -38,7 +38,7 @@ class ListTasks extends AbstractView
       </div>
     `;
 
-    $('#'+this.idDiv).html(htmlText);
+    $(this.element).html(htmlText);
     this.addEvent();
   }
 

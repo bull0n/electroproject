@@ -1,8 +1,8 @@
 class AbstractView
 {
-  constructor(idDiv)
+  constructor(element)
   {
-    this.idDiv = idDiv;
+    this.element = element;
   }
 
   display()
