@@ -4,5 +4,7 @@ require("bootstrap");
 
 $(document).ready(function()
 {
-  $('body').load('views/tab-view/tab-view.html');
+  let TabView = require('./views/tab-view/tab-view.js');
+  let tabView = new TabView($('body'));
+  tabView.display();
 });

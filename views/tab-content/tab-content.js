@@ -1,11 +1,14 @@
-let {Project, Task, Member} = require('../../../data/project.js');
-let ListTasks = require('../../list-tasks/list-tasks.js');
+let AbstractView = require('../../abstract-view-class.js');
+let {Project, Task, Member} = require('../../data/project.js');
+let ListTasks = require('../list-tasks/list-tasks.js');
 
-class TabContent
+class TabContent extends AbstractView
 {
-  constructor(fileName)
+  constructor(element, fileName, prefix)
   {
+    super(element);
     this.project = new Project();
+    this.prefix = prefix;
 
     this.project = {
       name : 'test',
@@ -65,21 +68,31 @@ class TabContent
     }
   }
 
-  createTabContent(prefix, divIdTarget)
+  display()
   {
-    let {displayView, addView, addAction, createBasicStructure, views} = require('./create-tab.js');
+    let {displayView, addView, addAction, views} = require('./create-tab-functions.js');
 
-    views[prefix] = [];
+    views[this.prefix] = [];
 
-    createBasicStructure(prefix, divIdTarget);
+    this.createBasicStructure();
 
-    addView(prefix, 'Diagram', '<i class="fas fa-equals"></i>', ListTasks, this.project);
-    addView(prefix, 'Tasks', '<i class="fas fa-tasks"></i>', ListTasks, this.project);
-    addView(prefix, 'Team', '<i class="fas fa-users"></i>', ListTasks, this.project);
+    addView(this.prefix, 'Diagram', '<i class="fas fa-equals"></i>', ListTasks, this.project);
+    addView(this.prefix, 'Tasks', '<i class="fas fa-tasks"></i>', ListTasks, this.project);
+    addView(this.prefix, 'Team', '<i class="fas fa-users"></i>', ListTasks, this.project);
 
-    addAction(prefix, 'Save', '<i class="fas fa-save"></i>', function() { console.log('hello world'); });
+    addAction(this.prefix, 'Save', '<i class="fas fa-save"></i>', function() { console.log('hello world'); });
 
-    $('#'+ views[prefix][1].getIdButton()).click();
+    $('#'+ views[this.prefix][1].getIdButton()).click();
+  }
+
+  createBasicStructure()
+  {
+    $(this.element).html(`
+      <div class="content-view">
+        <div id="${this.prefix}-left-button" class="left-button"></div>
+        <div id="${this.prefix}-content" class="content"></div>
+      </div>
+    `);
   }
 }
 
