@@ -9,6 +9,18 @@ class Task
     this.workingOn = []; //type member
     this.finished = false;
   }
+
+  isWorkingOn(member)
+  {
+    for(let i = 0; i < this.workingOn.length; i++)
+    {
+      if(member.equals(this.workingOn[i]))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
 }
 
 module.exports = Task;

@@ -10,62 +10,34 @@ class TabContent extends AbstractView
     this.project = new Project();
     this.prefix = prefix;
 
-    this.project = {
-      name : 'test',
-      filename : '/home/lucas/blabla',
-      team : [
-        {
-          name: 'Lucas',
-          color: 'black',
-        },
-        {
-          name: 'Malik',
-          color: 'Red',
-        }
-      ],
-      tasks : [
-        {
-          name : 'tâche 1',
-          from : new Date(),
-          to : new Date(),
-          inCharge : {
-            name: 'Lucas',
-            color: 'black'
-          },
-          workingOn : [
-            {
-              name: 'Lucas',
-              color: 'black',
-            },
-            {
-              name: 'Malik',
-              color: 'Red',
-            }
-          ],
-          finished : true
-        },
-        {
-          name : 'tâche 2',
-          from : new Date(),
-          to : new Date(),
-          inCharge : {
-            name: 'Lucas',
-            color: 'black'
-          },
-          workingOn : [
-            {
-              name: 'Lucas',
-              color: 'black',
-            },
-            {
-              name: 'Malik',
-              color: 'Red',
-            }
-          ],
-          finished : false
-        }
-      ]
-    }
+    let lucas = new Member();
+    lucas.name = 'lucas';
+    lucas.color = 'black';
+
+    let malik = new Member();
+    malik.name = 'malik';
+    malik.color = 'red';
+
+    let task1 = new Task();
+    task1.name = 'task1';
+    task1.from = new Date();
+    task1.to = new Date();
+    task1.inCharge = lucas;
+    task1.workingOn = [lucas, malik];
+    task1.finished = false;
+
+    let task2 = new Task();
+    task2.name = 'task2';
+    task2.from = new Date();
+    task2.to = new Date();
+    task2.inCharge = malik;
+    task2.workingOn = [lucas, malik];
+    task2.finished = true;
+
+    this.project.name = 'projet de la mort'
+    this.project.team = [lucas, malik];
+    this.project.tasks = [task1, task2];
+
   }
 
   display()

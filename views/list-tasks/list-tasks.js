@@ -31,9 +31,8 @@ class ListTasks extends AbstractView
           ${this.getHTMLLists()}
         </tbody>
       </table>
-
       <div class="action-btn-list-tasks">
-        <button type="button" id="${this.project.name.toLowerCase()}-add-task" class="btn btn-primary">
+        <button type="button" id="${this.prefix}-add-task" class="btn btn-primary">
           <i class="fas fa-plus"></i> Add a task
         </button>
       </div>
@@ -75,6 +74,7 @@ class ListTasks extends AbstractView
           </div>
         </td>
         <td>
+          <button class="btn btn-link btn-edit-task ${this.prefix}-edit" data-task-index="${i}"><i class="fas fa-edit"></i></button>
           <button class="btn btn-link btn-delete-task ${this.prefix}-delete" data-task-index="${i}"><i class="fas fa-trash"></i></button>
         </td>
       </tr>`;
@@ -106,20 +106,51 @@ class ListTasks extends AbstractView
 
     $('.'+this.prefix+'-delete').click(clickDeleteEvent);
 
-    let clickAddEvent = function(event)
+    let clickAddEditEvent = function(event)
     {
       let Modal = require('../modal/modal.js');
-
       let FormTask = require('../form-task/form-task.js');
-      let formTask = new FormTask(undefined, project);
 
-      Modal.show('Add a task', formTask.display(), function()
+      let formTask = undefined;
+      let isEdit = $(event.currentTarget).hasClass('btn-edit-task');
+
+      if(isEdit)
       {
+        formTask = new FormTask(project.tasks[$(event.currentTarget).attr('data-task-index')], project);
+      }
+      else
+      {
+        formTask = new FormTask(undefined, project);
+      }
 
+      let title = isEdit ? `Edit task : ${formTask.task.name}` : 'Add a task';
+
+      Modal.show(title, formTask.display(), function()
+      {
+        let task = formTask.task;
+        task.name = $('#task-name-input').val();
+        task.from = new Date($('#from-input').val());
+        task.to = new Date($('#to-input').val());
+
+        task.inCharge = project.team[$('#in-charge-input').val()];
+
+        task.workingOn = [];
+        let indexWorkingOn = $('#working-on-input').val();
+
+        for(let i = 0; i < indexWorkingOn.length; i++)
+        {
+          task.workingOn.push(project.team[indexWorkingOn[i]]);
+        }
+
+        if(!isEdit)
+        {
+          project.tasks.push(task);
+        }
+        taskView.display();
       });
     }
 
-    $(`#${this.project.name.toLowerCase()}-add-task`).click(clickAddEvent);
+    $(`#${this.prefix}-add-task, .${this.prefix}-edit`).click(clickAddEditEvent);
   }
 }
 

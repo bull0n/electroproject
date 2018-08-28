@@ -34,8 +34,10 @@ class Modal
 
     $('#confirm-btn').click(function(event)
     {
-      confirmAction();
-      $('#main-modal').modal('hide');
+      if(confirmAction() !== false)
+      {
+        $('#main-modal').modal('hide');
+      }
     });
 
     $('#main-modal').on('hidden.bs.modal', function (event) {
