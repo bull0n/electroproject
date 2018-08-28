@@ -30,7 +30,7 @@ function addView(prefix, name, icon, ClassView, project)
   $('#'+idDiv).append(tabDiv.getContentDiv());
   $('#' + tabDiv.getIdButton()).click(displayView);
 
-  let view = new ClassView($('#'+tabDiv.getIdContentDiv()), project);
+  let view = new ClassView($('#'+tabDiv.getIdContentDiv()), project, prefix);
   view.display();
 
   views[prefix].push(tabDiv);

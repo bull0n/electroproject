@@ -3,11 +3,12 @@ let {Project, Task, Member} = require('../../data/project.js');
 
 class ListTasks extends AbstractView
 {
-  constructor(element, project)
+  constructor(element, project, prefix)
   {
     super(element);
     this.project = project
     this.listTasks = this.project.tasks;
+    this.prefix = prefix;
   }
 
   display()
@@ -74,7 +75,7 @@ class ListTasks extends AbstractView
           </div>
         </td>
         <td>
-          <button class="btn btn-link btn-delete-task" data-task-id=""><i class="fas fa-trash" data-task=""></i></button>
+          <button class="btn btn-link btn-delete-task delete-${this.prefix}" data-task-index="${i}"><i class="fas fa-trash"></i></button>
         </td>
       </tr>`;
     }
@@ -85,15 +86,22 @@ class ListTasks extends AbstractView
   addEvent()
   {
     let project = this.project;
+    let taskView = this;
 
     let clickEvent = function(event)
     {
       let ConfirmModal = require('../confirm-modal/confirm-modal.js');
 
-      ConfirmModal.show('test', 'test', function() { console.log(project); });
+      let iTask = $(event.currentTarget).attr('data-task-index');
+
+      ConfirmModal.show('Confirmation needed', 'Do you really want to delete this tasks?', function()
+      {
+        project.tasks.splice(iTask, 1);
+        taskView.display();
+      });
     }
 
-    $('.btn-delete-task').click(clickEvent);
+    $('.delete-'+this.prefix).click(clickEvent);
 
     $(`#${this.project.name.toLowerCase()}-add-task`).click(function(event)
     {

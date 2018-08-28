@@ -76,13 +76,13 @@ class TabContent extends AbstractView
 
     this.createBasicStructure();
 
-    addView(this.prefix, 'Diagram', '<i class="fas fa-equals"></i>', ListTasks, this.project);
+    //addView(this.prefix, 'Diagram', '<i class="fas fa-equals"></i>', ListTasks, this.project);
     addView(this.prefix, 'Tasks', '<i class="fas fa-tasks"></i>', ListTasks, this.project);
-    addView(this.prefix, 'Team', '<i class="fas fa-users"></i>', ListTasks, this.project);
+    //addView(this.prefix, 'Team', '<i class="fas fa-users"></i>', ListTasks, this.project);
 
     addAction(this.prefix, 'Save', '<i class="fas fa-save"></i>', function() { console.log('hello world'); });
 
-    $('#'+ views[this.prefix][1].getIdButton()).click();
+    $('#'+ views[this.prefix][0].getIdButton()).click();
   }
 
   createBasicStructure()
