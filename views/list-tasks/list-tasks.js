@@ -90,7 +90,7 @@ class ListTasks extends AbstractView
 
     let clickEvent = function(event)
     {
-      let ConfirmModal = require('../confirm-modal/confirm-modal.js');
+      let Modal = require('../modal/modal.js');
 
       let iTask = $(event.currentTarget).attr('data-task-index');
 

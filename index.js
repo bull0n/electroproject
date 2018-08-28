@@ -5,7 +5,7 @@ require("bootstrap");
 
 $(document).ready(function()
 {
-  let ConfirmModal = require('./views/confirm-modal/confirm-modal.js');
+  let Modal = require('./views/modal/modal.js');
   ConfirmModal.display($('#modal-container'));
 
   let TabView = require('./views/tab-view/tab-view.js');
