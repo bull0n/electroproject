@@ -94,7 +94,7 @@ class ListTasks extends AbstractView
 
       let iTask = $(event.currentTarget).attr('data-task-index');
 
-      ConfirmModal.show('Confirmation needed', 'Do you really want to delete this tasks?', function()
+      Modal.show('Confirmation needed', 'Do you really want to delete this tasks?', function()
       {
         project.tasks.splice(iTask, 1);
         taskView.display();

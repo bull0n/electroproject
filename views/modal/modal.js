@@ -1,17 +1,9 @@
-class ConfirmModal
+class Modal
 {
-  constructor()
-  {
-    this.title = title;
-    this.text = text;
-    this.confirm = confirmAction;
-    this.cancel = cancelAction;
-  }
-
   static display(elementTarget)
   {
     let htmlContent = `
-      <div class="modal fade" tabindex="-1" role="dialog" id="confirm-modal" aria-labelledby="confirm-modal" aria-hidden="true">
+      <div class="modal fade" tabindex="-1" role="dialog" id="main-modal" aria-labelledby="main-modal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -25,7 +17,7 @@ class ConfirmModal
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-primary" id="confirm-btn-confirm-modal">Confirm</button>
+              <button type="button" class="btn btn-primary" id="confirm-btn">Confirm</button>
             </div>
           </div>
         </div>
@@ -37,23 +29,23 @@ class ConfirmModal
 
   static show(title, content, confirmAction)
   {
-    $('#confirm-modal .modal-title').html(title);
-    $('#confirm-modal .modal-body').html(content);
+    $('#main-modal .modal-title').html(title);
+    $('#main-modal .modal-body').html(content);
 
-    $('#confirm-btn-confirm-modal').click(function(event)
+    $('#confirm-btn').click(function(event)
     {
       confirmAction();
-      $('#confirm-modal').modal('hide');
+      $('#main-modal').modal('hide');
     });
 
-    $('#confirm-modal').on('hidden.bs.modal', function (event) {
-      $('#confirm-modal .modal-title').html('');
-      $('#confirm-modal .modal-body').html('');
-      $('#confirm-btn-confirm-modal').unbind('click');
+    $('#main-modal').on('hidden.bs.modal', function (event) {
+      $('#main-modal .modal-title').html('');
+      $('#main-modal .modal-body').html('');
+      $('#confirm-btn').unbind('click');
     });
 
-    $('#confirm-modal').modal('show');
+    $('#main-modal').modal('show');
   }
 }
 
-module.exports = ConfirmModal;
+module.exports = Modal;
