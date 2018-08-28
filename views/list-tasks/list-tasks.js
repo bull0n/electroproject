@@ -75,7 +75,7 @@ class ListTasks extends AbstractView
           </div>
         </td>
         <td>
-          <button class="btn btn-link btn-delete-task delete-${this.prefix}" data-task-index="${i}"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-link btn-delete-task ${this.prefix}-delete" data-task-index="${i}"><i class="fas fa-trash"></i></button>
         </td>
       </tr>`;
     }
@@ -88,25 +88,38 @@ class ListTasks extends AbstractView
     let project = this.project;
     let taskView = this;
 
-    let clickEvent = function(event)
+    let clickDeleteEvent = function(event)
     {
       let Modal = require('../modal/modal.js');
 
       let iTask = $(event.currentTarget).attr('data-task-index');
 
-      Modal.show('Confirmation needed', 'Do you really want to delete this tasks?', function()
+      Modal.show('Confirmation needed', `
+        <p>Do you really want to delete this tasks?<p>
+        <strong>${project.tasks[iTask].name}</strong>
+      `, function()
       {
         project.tasks.splice(iTask, 1);
         taskView.display();
       });
     }
 
-    $('.delete-'+this.prefix).click(clickEvent);
+    $('.'+this.prefix+'-delete').click(clickDeleteEvent);
 
-    $(`#${this.project.name.toLowerCase()}-add-task`).click(function(event)
+    let clickAddEvent = function(event)
     {
-      console.log('test2');
-    });
+      let Modal = require('../modal/modal.js');
+
+      let FormTask = require('../form-task/form-task.js');
+      let formTask = new FormTask(undefined, project);
+
+      Modal.show('Add a task', formTask.display(), function()
+      {
+
+      });
+    }
+
+    $(`#${this.project.name.toLowerCase()}-add-task`).click(clickAddEvent);
   }
 }
 
