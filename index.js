@@ -8,8 +8,11 @@ $(document).ready(function()
   let ConfirmModal = require('./views/confirm-modal/confirm-modal.js');
   ConfirmModal.display($('#modal-container'));
 
-  let TabView = require('./views/tab-view/tab-view.js');
-  let tabView = new TabView($('#content-container'));
+  let ListMembers = require('./views/list-members/list-members.js');
+  let Project = require('./data/project.js').Project;
+  console.log(Project);
 
-  tabView.display();
+  let project = new Project();
+  let listMembers = new ListMembers($('body'), project);
+  listMembers.display();
 });
