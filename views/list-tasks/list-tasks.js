@@ -84,10 +84,16 @@ class ListTasks extends AbstractView
 
   addEvent()
   {
-    $('.btn-delete-task').click(function(event)
+    let project = this.project;
+
+    let clickEvent = function(event)
     {
-      console.log('test');
-    });
+      let ConfirmModal = require('../confirm-modal/confirm-modal.js');
+
+      ConfirmModal.show('test', 'test', function() { console.log(project); });
+    }
+
+    $('.btn-delete-task').click(clickEvent);
 
     $(`#${this.project.name.toLowerCase()}-add-task`).click(function(event)
     {
