@@ -2,7 +2,6 @@
 let AbstractView = require('../../abstract-view-class.js');
 let {Project, Task, Member} = require('../../data/project.js');
 let SerializerTool = require('../../tools/serializertool.js');
-let Modal = require('../modal/modal-class.js')
 
 class ListMembers extends AbstractView
 {
@@ -68,36 +67,10 @@ class ListMembers extends AbstractView
 
   addEvent()
   {
-    // Insert the modal
-    Modal.load('member-edit-modal');
-
     // Actions on the page
     $(document).ready(function()
     {
-      $("#btn-add-member").click(function()
-      {
-          Modal.prepare('New Member', './views/team-manager/member_form.html');
 
-          $(document).ready(function()
-          {
-            $('#member-edit-modal').modal('show');
-          });
-      });
-
-      $("#btn-modify-member").click(function()
-      {
-          Modal.prepare('Modify Member', './views/team-manager/member_form.html');
-
-          $(document).ready(function()
-          {
-            let elementsMap = new Map();
-            elementsMap.set("#cp_member_color");
-            elementsMap.set("#txt_member_name", "George");
-
-            Modal.setValues(elementsMap);
-            $('#member-edit-modal').modal('show');
-          });
-      });
     });
   }
 }
