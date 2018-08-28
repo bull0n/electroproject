@@ -1,8 +1,8 @@
 // Imports
-let AbstractView = require('./abstract-view-class.js');
-let {Project, Task, Member} = require('./data/project.js');
-let SerializerTool = require('./tools/serializertool.js');
-let Modal = require('./views/modal/modal-class.js')
+let AbstractView = require('../../abstract-view-class.js');
+let {Project, Task, Member} = require('../../data/project.js');
+let SerializerTool = require('../../tools/serializertool.js');
+let Modal = require('../modal/modal-class.js')
 
 class ListMembers extends AbstractView
 {
@@ -11,6 +11,7 @@ class ListMembers extends AbstractView
     super(element);
     this.project = project;
     this.listMembers = this.project.team;
+    this.listMembers = SerializerTool.unserializeFromFile("./team.epd");  // Tests
   }
 
   display()
@@ -29,7 +30,7 @@ class ListMembers extends AbstractView
       </thead>
       <tbody>
       `
-      this.getHTMLList();
+       + this.getHTMLList() +
       `
       </tbody>
     </table>
@@ -41,13 +42,14 @@ class ListMembers extends AbstractView
     </div>
     `;
 
-    $('#'+this.idDiv).html(htmlText);
+    $(this.element).html(htmlText);
+    this.addEvent();
   }
 
   addMember(member)
   {
-    let htmlText = `<td><style="background-color: "` + member.color + `"></td>`;
-    htmlText += `<td>` + member.name + `</td>`;
+    let htmlText = `<tr><td bgcolor="` + member.color + `"></td>`;
+    htmlText += `<td>` + member.name + `</td></tr>`;
     return htmlText;
   }
 
@@ -55,13 +57,48 @@ class ListMembers extends AbstractView
   {
     let htmlText = ``;
 
-    for(i = 0;i < membersArray.length; i++)
+    for(let i = 0;i < this.listMembers.length; i++)
     {
       let member = this.listMembers[i];
-      htmlText += addMember(member);
+      htmlText += this.addMember(member);
     }
 
     return htmlText;
+  }
+
+  addEvent()
+  {
+    // Insert the modal
+    Modal.load('member-edit-modal');
+
+    // Actions on the page
+    $(document).ready(function()
+    {
+      $("#btn-add-member").click(function()
+      {
+          Modal.prepare('New Member', './views/team-manager/member_form.html');
+
+          $(document).ready(function()
+          {
+            $('#member-edit-modal').modal('show');
+          });
+      });
+
+      $("#btn-modify-member").click(function()
+      {
+          Modal.prepare('Modify Member', './views/team-manager/member_form.html');
+
+          $(document).ready(function()
+          {
+            let elementsMap = new Map();
+            elementsMap.set("#cp_member_color");
+            elementsMap.set("#txt_member_name", "George");
+
+            Modal.setValues(elementsMap);
+            $('#member-edit-modal').modal('show');
+          });
+      });
+    });
   }
 }
 
