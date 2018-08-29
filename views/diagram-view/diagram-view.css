@@ -7,7 +7,11 @@
   display: flex;
   position: absolute;
   z-index: -1;
-  margin-left: 300px;
+  padding-left: 299px;
+  padding-top: 34px;
+  border-top: 1px solid #999;
+  border-left: 1px solid #999;
+  border-bottom: 1px solid #999;
 }
 .separator-container, .separator-planning
 {
@@ -15,7 +19,6 @@
 }
 .separator-planning
 {
-  width: 30px;
   border-left: 1px solid #BBB;
 }
 
@@ -23,43 +26,56 @@
 {
   font-weight: bold;
 }
-.row-planning.title-planning div
+.row-planning:nth-child(2)
 {
   border-bottom: 2px solid #999;
 }
-.planning-label, .row-planning
+.row-planning
 {
-  float: left;
+  display: grid;
+  grid-template-columns: 130px 170px auto;
+  grid-template-rows: auto;
 }
 .planning-label
 {
   padding: 5px;
   height: 34px;
+  border-bottom: 1px solid #999;
+}
+.planning-title
+{
+  border-bottom: none !important;
 }
 .task-name
 {
   width: 130px;
   border-right: 1px solid #999;
 }
-.working-on
+.task-name, .in-charge, .row-planning:last-child > .btn-group
+{
+  border-bottom: 1px solid #999;
+}
+.in-charge
 {
   width: 170px;
 }
 .period
 {
-  float: left;
   background-color: red;
   height: 28px;
   width: 30px;
-  margin-top: 3px;
+  padding-top: 3px;
   margin-left: 60px;
   border-radius: 3px;
   border: 1px solid #999;
 }
-
+.btn-dropdown-planning, .row-planning > button
+{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
 .btn-action-diagram
 {
-  width: 160px;
-  margin-top: 5px;
-  margin-left: 5px !important;
+  width: 96%;
+  margin: 3px 5px !important;
 }
