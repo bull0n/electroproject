@@ -8,8 +8,13 @@
 
 .btn-team-edition
 {
-  width: 100%;
-  height: 32px;
+  text-align : right;
+  margin-right: 35px;
+}
+
+.btn-remove-member
+{
+  padding: 0;
 }
 
 #tbl_column_color
@@ -19,5 +24,10 @@
 
 #tbl_column_name
 {
-  width: 75%;
+  width: 65%;
+}
+
+#tbl_column_Controls
+{
+  width: 10%;
 }
