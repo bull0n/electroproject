@@ -1,25 +1,25 @@
 // Imports
 let AbstractView = require('../../abstract-view-class.js');
 let {Project, Task, Member} = require('../../data/project.js');
-<<<<<<< HEAD
-let Modal = require('../modal/modal-class.js')
-=======
+let Modal = require('../modal/modal.js')
 let SerializerTool = require('../../tools/serializertool.js');
->>>>>>> team-manager
 
 class ListMembers extends AbstractView
 {
-  constructor(element, project)
+  constructor(element, project, prefix)
   {
     super(element);
     this.project = project;
-    this.project.team = SerializerTool.unserializeFromFile("./team.epd");  // Tests
+    this.prefix = prefix;
+    //this.project.team = SerializerTool.unserializeFromFile("./team.epd");  // Tests
   }
 
   display()
   {
     let htmlText = `
     <link rel="stylesheet" type="text/css" href="./views/list-members/list-members.css">
+
+    <h3>Team</h3>
 
     <table id="tbl_members" class="table table-hover">
       <col id="tbl_column_color">
@@ -38,7 +38,7 @@ class ListMembers extends AbstractView
     </table>
 
     <div class="btn-team-edition" class="btn-group" role="group">
-      <button type="button" id="${this.project.name.toLowerCase()}-add-member" class="btn btn-primary"><i class="fas fa-plus"></i> Add a member</button>
+      <button type="button" id="${this.prefix}-add-member" class="btn btn-primary"><i class="fas fa-plus"></i> Add a member</button>
     </div>
     `;
 
@@ -81,30 +81,30 @@ class ListMembers extends AbstractView
 
     let addMemberClickEvent = function(event)
     {
-      let ConfirmModal = require('../confirm-modal/confirm-modal.js');
+      let ConfirmModal = require('../modal/modal.js');
 
-      ConfirmModal.show('Add member', listMembers.getHTMLFormFunc("#345321", "coco"), function() { listMembers.addMemberConfirm(); });
+      ConfirmModal.show('Add member', listMembers.getHTMLFormFunc(), function() { listMembers.addMemberConfirm(); });
     };
 
-    $(`#${this.project.name.toLowerCase()}-add-member`).click(addMemberClickEvent);
+    $(`#${this.prefix}-add-member`).click(addMemberClickEvent);
 
     let modifyMemberClickEvent = function(event)
     {
-      let ConfirmModal = require('../confirm-modal/confirm-modal.js');
+      let Modal = require('../modal/modal.js');
       let index = $(this).closest("tr").index();
       let member = project.team[index];
 
-      ConfirmModal.show('Modify member', listMembers.getHTMLFormFunc(member.color, member.name), function() { listMembers.modifyMemberConfirm(member); });
+      Modal.show('Modify member', listMembers.getHTMLFormFunc(member.color, member.name), function() { listMembers.modifyMemberConfirm(member); });
     };
 
     $(`.btn-modify-member`).click(modifyMemberClickEvent);
 
     let removeMemberClickEvent = function(event)
     {
-      let ConfirmModal = require('../confirm-modal/confirm-modal.js');
+      let Modal = require('../modal/modal.js');
       let index = $(this).closest("tr").index();
 
-      ConfirmModal.show('Modify member', listMembers.getHTMLRemoveMemberWarningMessage(), function() { listMembers.removeMemberConfirm(index); });
+      Modal.show('Modify member', listMembers.getHTMLRemoveMemberWarningMessage(), function() { listMembers.removeMemberConfirm(index); });
     };
 
     $(`.btn-remove-member`).click(removeMemberClickEvent);
@@ -141,14 +141,17 @@ class ListMembers extends AbstractView
     this.display();
   }
 
-  getHTMLFormFunc(color, name)
+  getHTMLFormFunc(color = '', name = '')
   {
     let htmlText = `
-    <label for="color_picker">Color</label>
-    <input type="color" id="cp_member_color" value="` + color + `" name="textcolor"></input>
-    <br>
-    <label for="txt_name">Name</label>
-    <input type="text" id="txt_member_name" name="name" value="` + name + `"></input><br>
+    <div class="form-group">
+      <label for="color_picker">Color</label>
+      <input type="color" id="cp_member_color" value="${color}" name="textcolor" class="form-control">
+    </div>
+    <div class="form-group">
+      <label for="txt_name">Name</label>
+      <input type="text" id="txt_member_name" name="name" value="${name}" class="form-control" placeholder="name">
+    </div>
     `;
 
     return htmlText;

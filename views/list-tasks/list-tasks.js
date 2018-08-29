@@ -24,7 +24,7 @@ class ListTasks extends AbstractView
             <th scope="col">From</th>
             <th scope="col">To</th>
             <th scope="col">Finished ?</th>
-            <th scope="col"></th>
+            <th scope="col">Controls</th>
           </tr>
         </thead>
         <tbody>
