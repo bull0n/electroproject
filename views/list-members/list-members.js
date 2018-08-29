@@ -136,7 +136,27 @@ class ListMembers extends AbstractView
 
   removeMemberConfirm(index)
   {
+    let member = this.project.team[index];
+
     this.project.team.splice(index, 1);
+
+    for(let i = 0; i < this.project.tasks.length; i++)
+    {
+      let task = this.project.tasks[i];
+
+      if(member.equals(task.inCharge))
+      {
+        task.inCharge = undefined;
+      }
+
+      for(let j = 0; j < task.workingOn.length; j++)
+      {
+        if(task.workingOn[j].equals(member))
+        {
+          task.workingOn.splice(j, 1);
+        }
+      }
+    }
 
     this.display();
   }
