@@ -58,7 +58,7 @@ class TabContent extends AbstractView
     addAction(this.prefix, 'Save', '<i class="fas fa-save"></i>', function() {
       const {app} = require('electron').remote; // ??
       let directory = app.getPath('documents');
-      FileDialog.saveAs(project, directory);
+      FileDialog.saveAs(project, directory); // parent should be passed but can't get the global win ...
     });
 
     $('#'+ views[this.prefix][0].getIdButton()).click();
