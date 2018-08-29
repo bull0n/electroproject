@@ -1,7 +1,7 @@
 // Imports
 let AbstractView = require('../../abstract-view-class.js');
 let {Project, Task, Member} = require('../../data/project.js');
-let Modal = require('../modal/modal.js')
+let Modal = require('../modal/modal.js');
 let SerializerTool = require('../../tools/serializertool.js');
 
 class ListMembers extends AbstractView
