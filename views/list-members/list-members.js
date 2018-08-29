@@ -1,8 +1,7 @@
 // Imports
-let AbstractView = require('./abstract-view-class.js');
-let {Project, Task, Member} = require('./data/project.js');
-let SerializerTool = require('./tools/serializertool.js');
-let Modal = require('./views/modal/modal-class.js')
+let AbstractView = require('../../abstract-view-class.js');
+let {Project, Task, Member} = require('../../data/project.js');
+let Modal = require('../modal/modal-class.js')
 
 class ListMembers extends AbstractView
 {
@@ -28,9 +27,7 @@ class ListMembers extends AbstractView
         </tr>
       </thead>
       <tbody>
-      `
-      this.getHTMLList();
-      `
+        ${this.getHTMLList()}
       </tbody>
     </table>
 
@@ -47,7 +44,7 @@ class ListMembers extends AbstractView
   addMember(member)
   {
     let htmlText = `<td><style="background-color: "` + member.color + `"></td>`;
-    htmlText += `<td>` + member.name + `</td>`;
+    htmlText += `<td>${member.name}</td>`;
     return htmlText;
   }
 
@@ -55,7 +52,7 @@ class ListMembers extends AbstractView
   {
     let htmlText = ``;
 
-    for(i = 0;i < membersArray.length; i++)
+    for(let i = 0;i < membersArray.length; i++)
     {
       let member = this.listMembers[i];
       htmlText += addMember(member);
