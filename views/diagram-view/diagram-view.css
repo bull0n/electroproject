@@ -1,0 +1,65 @@
+.row-planning
+{
+  width: 100%;
+  border-left: 1px solid #999;
+}
+.separator-container {
+  display: flex;
+  position: absolute;
+  z-index: -1;
+  margin-left: 300px;
+}
+.separator-container, .separator-planning
+{
+  height: 100%;
+}
+.separator-planning
+{
+  width: 30px;
+  border-left: 1px solid #BBB;
+}
+
+.row-planning.title-planning
+{
+  font-weight: bold;
+}
+.row-planning.title-planning div
+{
+  border-bottom: 2px solid #999;
+}
+.planning-label, .row-planning
+{
+  float: left;
+}
+.planning-label
+{
+  padding: 5px;
+  height: 34px;
+}
+.task-name
+{
+  width: 130px;
+  border-right: 1px solid #999;
+}
+.working-on
+{
+  width: 170px;
+}
+.period
+{
+  float: left;
+  background-color: red;
+  height: 28px;
+  width: 30px;
+  margin-top: 3px;
+  margin-left: 60px;
+  border-radius: 3px;
+  border: 1px solid #999;
+}
+
+.btn-action-diagram
+{
+  width: 160px;
+  margin-top: 5px;
+  margin-left: 5px !important;
+}

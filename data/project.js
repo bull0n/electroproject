@@ -10,6 +10,36 @@ class Project
     this.team = [];
     this.tasks = [];
   }
+
+  from()
+  {
+    let from = undefined;
+
+    for(let i = 0; i < this.tasks.length; i++)
+    {
+      if(this.tasks[i].from < from || from === undefined)
+      {
+        from = this.tasks[i].from;
+      }
+    }
+
+    return from;
+  }
+
+  to()
+  {
+    let to = undefined;
+
+    for(let i = 0; i < this.tasks.length; i++)
+    {
+      if(this.tasks[i].to > to || to === undefined)
+      {
+        to = this.tasks[i].from;
+      }
+    }
+
+    return to;
+  }
 }
 
 module.exports.Project = Project;

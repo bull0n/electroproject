@@ -22,7 +22,7 @@ class TabContent extends AbstractView
 
     let task1 = new Task();
     task1.name = 'task1';
-    task1.from = new Date();
+    task1.from = new Date('02-23-2017');
     task1.to = new Date();
     task1.inCharge = lucas;
     task1.workingOn = [lucas, malik];
