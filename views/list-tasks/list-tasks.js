@@ -6,7 +6,7 @@ class ListTasks extends AbstractView
   constructor(element, project, prefix)
   {
     super(element);
-    this.project = project
+    this.project = project;
     this.listTasks = this.project.tasks;
     this.prefix = prefix;
   }
@@ -45,7 +45,6 @@ class ListTasks extends AbstractView
   getHTMLLists()
   {
     let htmlText = '';
-
     for(let i = 0; i < this.listTasks.length; i++)
     {
       let task = this.listTasks[i];

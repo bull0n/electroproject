@@ -7,6 +7,8 @@ $('#btn-new-diagram, #btn-open-diagram').click(function()
 
 let AbstractView = require("../../abstract-view-class.js");
 let FileDialog = require("../file-dialog/file-dialog.js");
+let TabView = require('../tab-view/tab-view.js');
+let Project = require('../../data/project.js').Project;
 
 class Home extends AbstractView
 {
@@ -32,31 +34,46 @@ class Home extends AbstractView
 
   addEvent()
   {
+    let currentClass = this;
+
     let newProjectClickEvent = function(event)
     {
       // Open an empty project directly or open the save dialog ?
     };
 
-    let openProjectClickEvent = function(event)
-    {
-      const {app} = require('electron').remote;
+    let openProjectClickEvent = this.openProject;
 
-      let directory = app.getPath('documents');
-      let project = FileDialog.open(directory);
-      console.log(project);
-      // Add tab here ? and how ?
-    };
-
-    let quitAppClickEvent = function(event)
-    {
-      const {app} = require('electron').remote;
-
-      app.quit();
-    };
+    let quitAppClickEvent = this.quitApp;
 
     $('#btn-new-project').click(newProjectClickEvent);
     $('#btn-open-project').click(openProjectClickEvent);
     $('#btn-quit-app').click(quitAppClickEvent);
+  }
+
+  newProject()
+  {
+    let tabView = new TabView($('#content-container'));
+
+    tabView.display();
+    tabView.createTab(new Project());
+  }
+
+  openProject()
+  {
+    const {app} = require('electron').remote;
+
+    let directory = app.getPath('documents');
+    let project = FileDialog.open(directory);
+    let tabView = new TabView($('#content-container'));
+
+    tabView.display();
+    tabView.createTab(project);
+  }
+
+  quitApp()
+  {
+    const {app} = require('electron').remote;
+    app.quit();
   }
 }
 

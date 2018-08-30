@@ -6,40 +6,11 @@ let FileDialog = require('../file-dialog/file-dialog.js');
 
 class TabContent extends AbstractView
 {
-  constructor(element, fileName, prefix)
+  constructor(element, project, prefix)
   {
     super(element);
-    this.project = new Project();
+    this.project = project;
     this.prefix = prefix;
-
-    let lucas = new Member();
-    lucas.name = 'lucas';
-    lucas.color = 'black';
-
-    let malik = new Member();
-    malik.name = 'malik';
-    malik.color = 'red';
-
-    let task1 = new Task();
-    task1.name = 'task1';
-    task1.from = new Date();
-    task1.to = new Date();
-    task1.inCharge = lucas;
-    task1.workingOn = [lucas, malik];
-    task1.finished = false;
-
-    let task2 = new Task();
-    task2.name = 'task2';
-    task2.from = new Date();
-    task2.to = new Date();
-    task2.inCharge = malik;
-    task2.workingOn = [lucas, malik];
-    task2.finished = true;
-
-    this.project.name = 'projet de la mort'
-    this.project.team = [lucas, malik];
-    this.project.tasks = [task1, task2];
-
   }
 
   display()
