@@ -11,7 +11,6 @@ class ListMembers extends AbstractView
     super(element);
     this.project = project;
     this.prefix = prefix;
-    //this.project.team = SerializerTool.unserializeFromFile("./team.epd");  // Tests
   }
 
   display()
