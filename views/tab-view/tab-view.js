@@ -83,7 +83,7 @@ class TabView extends AbstractView
       $(window).trigger('resize');
     });
   }
-
+}
 
 //make the active tab
 function makeActive(idTab)
