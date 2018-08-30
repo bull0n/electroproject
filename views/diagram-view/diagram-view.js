@@ -149,10 +149,12 @@ class DiagramView extends AbstractTabContentView
 
     $(document).ready(() =>
     {
-      const BORDER_THICKNESS = 2;
-      let height = $(`#${this.prefix}-diagram-container`).height() - $(`#${this.prefix}-diagram-container .row-planning:nth-child(2)`).height() - BORDER_THICKNESS;
+      this.setSeparatorHeight();
+    });
 
-      $(`#${this.prefix}-diagram-container .separator-container, #${this.prefix}-diagram.container .separator-planning`).height(height);
+    $(`#${this.prefix}-${this.constructor.name.toLowerCase()}-btn`).click(() =>
+    {
+      this.setSeparatorHeight();
     });
   }
 
@@ -180,6 +182,14 @@ class DiagramView extends AbstractTabContentView
     {
       return this.project.getTasksOfMember(filter.member);
     }
+  }
+
+  setSeparatorHeight()
+  {
+    const BORDER_THICKNESS = 2;
+    let height = $(`#${this.prefix}-diagram-container`).height() - $(`#${this.prefix}-diagram-container .row-planning:nth-child(2)`).height() - BORDER_THICKNESS;
+
+    $(`#${this.prefix}-diagram-container .separator-container, #${this.prefix}-diagram.container .separator-planning`).height(height);
   }
 }
 
