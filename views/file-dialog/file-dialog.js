@@ -21,7 +21,7 @@ class FileDialog
 
   static open(directory, parentWindow = null)
   {
-    let path = dialog.showOpenDialog(parentWindow, {title:"Open", defaultPath:directory});
+    let path = dialog.showOpenDialog(parentWindow, {title:"Open", defaultPath:directory})[0];
     let project = null;
 
     if(path)
