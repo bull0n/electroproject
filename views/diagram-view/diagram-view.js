@@ -47,9 +47,7 @@ class DiagramView extends AbstractView
               Member to show
             </button>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              ${this.buildTeam()}
             </div>
           </div>
         </div>
@@ -57,6 +55,7 @@ class DiagramView extends AbstractView
     `;
 
     $(this.element).html(htmlText);
+    this.addEvent();
   }
 
   buildTasks(order)
@@ -100,7 +99,38 @@ class DiagramView extends AbstractView
 
   addEvent()
   {
+    let project = this.project;
+    let diagramView = this;
 
+    let addEventFunction = function()
+    {
+      let Modal = require('../modal/modal.js');
+      let FormTask = require('../form-task/form-task.js');
+
+      let formTask = undefined;
+
+      formTask = new FormTask(undefined, project);
+
+      let title = 'Add a task';
+
+      Modal.show(title, formTask.display(), function()
+      {
+        FormTask.save(formTask, false);
+        diagramView.display();
+      });
+    }
+
+    $(`#${this.prefix}-add-task-diagram`).click(addEventFunction);
+  }
+
+  buildTeam() {
+    let htmlText = '';
+    for(let i = 0; i < this.project.team.length; i++)
+    {
+      htmlText += `<a class="dropdown-item" style="color: ${this.project.team[i].color};" href="#">${ this.project.team[i].name }</a>`;
+    }
+
+    return htmlText;
   }
 }
 
