@@ -127,26 +127,7 @@ class ListTasks extends AbstractView
 
       Modal.show(title, formTask.display(), function()
       {
-        let task = formTask.task;
-        task.name = $('#task-name-input').val();
-        task.from = new Date($('#from-input').val());
-        task.to = new Date($('#to-input').val());
-
-        task.inCharge = project.team[$('#in-charge-input').val()];
-
-        task.workingOn = [];
-        let indexWorkingOn = $('#working-on-input').val();
-
-        for(let i = 0; i < indexWorkingOn.length; i++)
-        {
-          task.workingOn.push(project.team[indexWorkingOn[i]]);
-        }
-
-        if(!isEdit)
-        {
-          project.tasks.push(task);
-        }
-        taskView.display();
+        FormTask.save(formTask, isEdit);
       });
     }
 
