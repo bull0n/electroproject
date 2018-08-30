@@ -36,9 +36,17 @@ class TabContent extends AbstractView
     task2.workingOn = [lucas, malik];
     task2.finished = true;
 
+    let task3 = new Task();
+    task3.name = 'task3';
+    task3.from = new Date();
+    task3.to = new Date();
+    task3.inCharge = lucas;
+    task3.workingOn = [lucas, malik];
+    task3.finished = true;
+
     this.project.name = 'projet de la mort'
     this.project.team = [lucas, malik];
-    this.project.tasks = [task1, task2];
+    this.project.tasks = [task1, task2, task3];
 
   }
 

@@ -12,10 +12,10 @@ class DiagramView extends AbstractView
     this.WIDTH_DAY = 30;
   }
 
-  display()
+  display(filter = undefined)
   {
     let htmlText = `
-      <h3>Gantt Diagram</h3>
+      <h3>Gantt</h3>
 
       <div class="diagram-container clearfix">
         <div class="separator-container">
@@ -30,7 +30,7 @@ class DiagramView extends AbstractView
           </div>
         </div>
 
-        ${this.buildTasks(undefined)}
+        ${this.buildTasks(filter)}
 
         <div class="row-planning">
           <button class="btn btn-primary btn-action-diagram" id="${this.prefix}-add-task-diagram"><i class="fas fa-plus"></i> Add a task</button>
@@ -58,16 +58,19 @@ class DiagramView extends AbstractView
     this.addEvent();
   }
 
-  buildTasks(order)
+  buildTasks(filter)
   {
     let htmlTasks = '';
 
-    for(let i = 0; i < this.project.tasks.length; i++)
+    let tasks = this.getSortedTasks(filter);
+
+    for(let i = 0; i < tasks.length; i++)
     {
-      let task = this.project.tasks[i];
+      let task = tasks[i];
       let daysFromStart = Math.floor((task.from - this.project.from()) / MS_IN_DAYS);
 
-      htmlTasks += `<div class="row-planning task" id="${this.prefix}-${task.name.toLowerCase()}">
+      htmlTasks += `
+      <div class="row-planning task" id="${this.prefix}-${task.name.toLowerCase()}">
         <div class="task-name planning-label">
           ${task.name.toLowerCase()}
         </div>
@@ -121,16 +124,50 @@ class DiagramView extends AbstractView
     }
 
     $(`#${this.prefix}-add-task-diagram`).click(addEventFunction);
+
+    $(`#${this.prefix}-member-sort`).click(() =>
+    {
+      this.display('sort-member');
+    });
+
+    let filterMemberClick = function(event)
+    {
+
+      let iMember = parseInt($(event.currentTarget).attr('data-index-member'));
+      let member = diagramView.project.team[iMember];
+
+      diagramView.display({member: member});
+    };
+
+    filterMemberClick.bind(this);
+
+    $(`.${this.prefix}-filter-member`).click(filterMemberClick);
   }
 
   buildTeam() {
     let htmlText = '';
     for(let i = 0; i < this.project.team.length; i++)
     {
-      htmlText += `<a class="dropdown-item" style="color: ${this.project.team[i].color};" href="#">${ this.project.team[i].name }</a>`;
+      htmlText += `<a class="dropdown-item ${this.prefix}-filter-member" style="color: ${this.project.team[i].color};" data-index-member="${i}" href="#">${ this.project.team[i].name }</a>`;
     }
 
     return htmlText;
+  }
+
+  getSortedTasks(filter)
+  {
+    if(filter === undefined)
+    {
+      return this.project.tasks;
+    }
+    else if(filter === 'sort-member')
+    {
+      return this.project.getTasksSortedByMember();
+    }
+    else if(filter.hasOwnProperty('member'))
+    {
+      return this.project.getTasksOfMember(filter.member);
+    }
   }
 }
 
