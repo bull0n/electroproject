@@ -1,7 +1,7 @@
 
 const {dialog} = require('electron').remote;
 let SerializerTool = require('../../tools/serializertool.js');
-let Project = require("../../data/project.js");
+let Project = require("../../data/project.js").Project;
 
 class FileDialog
 {
@@ -26,7 +26,26 @@ class FileDialog
 
     if(path)
     {
-      project = SerializerTool.unserializeFromFile(path);
+      let revive = function(object)
+      {
+        let projectObject = new Project();
+        console.log(object.name);
+        projectObject.name = `${object.name}`;
+        projectObject.filename = `${object.filename}`;
+        projectObject.team = object.team;
+        projectObject.tasks = object.tasks;
+
+        for(let i = 0;i < projectObject.tasks.length; i++)
+        {
+          let task = projectObject.tasks[i];
+          task.from = new Date(task.from);
+          task.to = new Date(task.to);
+        }
+
+        return projectObject;
+      };
+
+      project = SerializerTool.unserializeFromFile(path, revive);
     }
     else
     {
