@@ -1,6 +1,9 @@
+.diagram-container
+{
+  display: inline-block;
+}
 .row-planning
 {
-  width: 100%;
   border-left: 1px solid #999;
 }
 .separator-container {
@@ -20,6 +23,10 @@
 .separator-planning
 {
   border-left: 1px solid #BBB;
+}
+.separator-planning:last-child, .row-planning:nth-child(2)
+{
+  border-right: 1px solid #BBB;
 }
 
 .row-planning.title-planning
