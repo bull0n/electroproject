@@ -67,6 +67,7 @@ class TabContent extends AbstractView
     $('#'+ views[this.prefix][0].getIdButton()).click();
   }
 
+  // create the basic structure of a tab view
   createBasicStructure()
   {
     $(this.element).html(`

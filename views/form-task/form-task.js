@@ -72,6 +72,7 @@ class FormTask extends AbstractView
     return htmlText;
   }
 
+  // save the task in the project
   static save(formTask, isEdit)
   {
     let task = formTask.task;

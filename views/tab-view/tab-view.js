@@ -23,6 +23,7 @@ class TabView extends AbstractView
     this.createTab(fileName);
   }
 
+  // create a tab and all event needed
   createTab(fileName)
   {
     let fileNameLower = fileName.toLowerCase();
@@ -54,6 +55,7 @@ class TabView extends AbstractView
     makeActive(li.id);
   }
 
+  // add the html to the dom
   display()
   {
     $(this.element).html(`

@@ -9,7 +9,7 @@ class DiagramView extends AbstractTabContentView
     super(element, project, prefix, icon);
     this.WIDTH_DAY = 30; // in pixels
   }
-
+  
   display(filter = undefined)
   {
     let htmlText = `
@@ -57,6 +57,7 @@ class DiagramView extends AbstractTabContentView
     this.addEvent();
   }
 
+  // build the html for every tasks
   buildTasks(filter)
   {
     let htmlTasks = '';
@@ -85,6 +86,7 @@ class DiagramView extends AbstractTabContentView
     return htmlTasks;
   }
 
+  // build all the separator divs
   buildSeparator()
   {
     let nDays = Math.floor((this.project.to() - this.project.from()) / MS_IN_DAYS); // transform into days
@@ -99,6 +101,7 @@ class DiagramView extends AbstractTabContentView
     return html;
   }
 
+  // add event to the page
   addEvent()
   {
     let project = this.project;
@@ -109,9 +112,7 @@ class DiagramView extends AbstractTabContentView
       let Modal = require('../modal/modal.js');
       let FormTask = require('../form-task/form-task.js');
 
-      let formTask = undefined;
-
-      formTask = new FormTask(undefined, project);
+      let formTask = new FormTask(undefined, project);
 
       let title = 'Add a task';
 
@@ -134,6 +135,7 @@ class DiagramView extends AbstractTabContentView
       this.display();
     });
 
+    //filter with the member selected
     let filterMemberClick = function(event)
     {
 
@@ -147,6 +149,8 @@ class DiagramView extends AbstractTabContentView
 
     $(`.${this.prefix}-filter-member`).click(filterMemberClick);
 
+    // when the html is built or when the view is selected, change the height of the separators
+    // when the view is refreshed from another tab, the height is 0. So we need to do it when the view is selected
     $(document).ready(() =>
     {
       this.setSeparatorHeight();
@@ -158,7 +162,9 @@ class DiagramView extends AbstractTabContentView
     });
   }
 
-  buildTeam() {
+  // build the html for the team for the filter
+  buildTeam()
+  {
     let htmlText = '';
     for(let i = 0; i < this.project.team.length; i++)
     {
@@ -168,6 +174,7 @@ class DiagramView extends AbstractTabContentView
     return htmlText;
   }
 
+  // get the tasks ordered / filtered
   getSortedTasks(filter)
   {
     if(filter === undefined)
@@ -184,6 +191,7 @@ class DiagramView extends AbstractTabContentView
     }
   }
 
+  // set the height of the separator to the grid of the tasks and action
   setSeparatorHeight()
   {
     const BORDER_THICKNESS = 2;

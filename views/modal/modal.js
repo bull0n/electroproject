@@ -1,8 +1,12 @@
 class Modal
 {
+  // add the html in elementTarget
+  // only one modal can exist
   static display(elementTarget)
   {
-    let htmlContent = `
+    if($('#main-modal') === undefined)
+    {
+      let htmlContent = `
       <div class="modal fade" tabindex="-1" role="dialog" id="main-modal" aria-labelledby="main-modal" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -22,11 +26,14 @@ class Modal
           </div>
         </div>
       </div>
-    `;
+      `;
 
-    $(elementTarget).append(htmlContent);
+      $(elementTarget).append(htmlContent);
+    }
   }
 
+  // show the moddle with title and content in parameter
+  // confirmAction is what will happen when the button validate is pushed
   static show(title, content, confirmAction)
   {
     $('#main-modal .modal-title').html(title);
