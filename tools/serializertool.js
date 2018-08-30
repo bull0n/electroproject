@@ -1,3 +1,5 @@
+Project = require('../data/project.js').Project;
+
 class SerializerTool
 {
   /**
@@ -18,7 +20,7 @@ class SerializerTool
   * @param {string} filename    Name of the file to extract data
   * @return {object}            Object unserialized
   */
-  static unserializeFromFile(filename)
+  static unserializeFromFile(filename, reviverFunc)
   {
     let fileSystem = require("fs");
     let serializedObject = null;
@@ -35,7 +37,8 @@ class SerializerTool
 
     serializedObject = fileSystem.readFileSync(filename)
 
-    return JSON.parse(serializedObject);
+    let object = JSON.parse(serializedObject);
+    return reviverFunc(object);
   }
 }
 
