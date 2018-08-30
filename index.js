@@ -1,7 +1,7 @@
 // Imports for all the program
 var $ = require("jquery");
 require("bootstrap");
-
+var {refreshTabContent} = require('./views/tab-content/create-tab-functions.js')
 
 $(document).ready(function()
 {

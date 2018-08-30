@@ -17,10 +17,8 @@
   border-left: 1px solid #999;
   border-bottom: 1px solid #999;
 }
-.separator-container, .separator-planning
-{
-  height: 100%;
-}
+
+
 .separator-planning
 {
   border-left: 1px solid #BBB;
@@ -86,4 +84,12 @@
 {
   width: 96%;
   margin: 3px 5px !important;
+}
+
+.dropdown-filter-member
+{
+  width: 96%;
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 }

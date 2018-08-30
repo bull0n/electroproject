@@ -1,15 +1,13 @@
-let AbstractView = require('../../abstract-view-class.js');
+let AbstractTabContentView = require('../../abstract-tab-content-view.js');
 
 const MS_IN_DAYS = 86400000;
 
-class DiagramView extends AbstractView
+class DiagramView extends AbstractTabContentView
 {
-  constructor(element, project, prefix)
+  constructor(element, project, prefix, icon)
   {
-    super(element);
-    this.project = project;
-    this.prefix = prefix;
-    this.WIDTH_DAY = 30;
+    super(element, project, prefix, icon);
+    this.WIDTH_DAY = 30; // in pixels
   }
 
   display(filter = undefined)
@@ -17,7 +15,7 @@ class DiagramView extends AbstractView
     let htmlText = `
       <h3>Gantt</h3>
 
-      <div class="diagram-container clearfix">
+      <div class="diagram-container clearfix" id="${this.prefix}-diagram-container">
         <div class="separator-container">
           ${ this.buildSeparator() }
         </div>
@@ -36,7 +34,7 @@ class DiagramView extends AbstractView
           <button class="btn btn-primary btn-action-diagram" id="${this.prefix}-add-task-diagram"><i class="fas fa-plus"></i> Add a task</button>
         </div>
         <div class="row-planning">
-          <button class="btn btn-primary btn-action-diagram" id="${this.prefix}-no-sort">Original order</button>
+          <button class="btn btn-primary btn-action-diagram" id="${this.prefix}-no-sort">No sort and filter</button>
         </div>
         <div class="row-planning">
           <button class="btn btn-primary btn-action-diagram" id="${this.prefix}-member-sort">Sort by member</button>
@@ -46,7 +44,7 @@ class DiagramView extends AbstractView
             <button type="button" class="btn btn-primary dropdown-toggle btn-action-diagram" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Member to show
             </button>
-            <div class="dropdown-menu">
+            <div class="dropdown-menu dropdown-filter-member">
               ${this.buildTeam()}
             </div>
           </div>
@@ -54,7 +52,8 @@ class DiagramView extends AbstractView
       </div>
     `;
 
-    $(this.element).html(htmlText);
+    $('#'+this.getIdContentDiv()).html(htmlText);
+
     this.addEvent();
   }
 
@@ -130,6 +129,11 @@ class DiagramView extends AbstractView
       this.display('sort-member');
     });
 
+    $(`#${this.prefix}-no-sort`).click(() =>
+    {
+      this.display();
+    });
+
     let filterMemberClick = function(event)
     {
 
@@ -142,6 +146,14 @@ class DiagramView extends AbstractView
     filterMemberClick.bind(this);
 
     $(`.${this.prefix}-filter-member`).click(filterMemberClick);
+
+    $(document).ready(() =>
+    {
+      const BORDER_THICKNESS = 2;
+      let height = $(`#${this.prefix}-diagram-container`).height() - $(`#${this.prefix}-diagram-container .row-planning:nth-child(2)`).height() - BORDER_THICKNESS;
+
+      $(`#${this.prefix}-diagram-container .separator-container, #${this.prefix}-diagram.container .separator-planning`).height(height);
+    });
   }
 
   buildTeam() {

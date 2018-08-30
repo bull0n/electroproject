@@ -1,7 +1,6 @@
-var ButtonAction = require('./btn-action-class.js');
-var TabDiv = require('./tab-div-class.js');
+let ButtonAction = require('./btn-action-class.js');
 
-var views = {};
+let views = {};
 
 function displayView(event)
 {
@@ -23,17 +22,17 @@ function displayView(event)
 
 function addView(prefix, name, icon, ClassView, project)
 {
-  let tabDiv = new TabDiv(prefix+'-'+name, prefix, icon);
   let idDiv = `${prefix}-content`;
 
-  $(`#${prefix}-left-button`).append(tabDiv.getButtonDisplay());
-  $('#'+idDiv).append(tabDiv.getContentDiv());
-  $('#' + tabDiv.getIdButton()).click(displayView);
+  let view = new ClassView(undefined, project, prefix, icon);
 
-  let view = new ClassView($('#'+tabDiv.getIdContentDiv()), project, prefix);
+  $(`#${prefix}-left-button`).append(view.getButtonDisplay());
+  $('#'+idDiv).append(view.getContentDiv());
+  $('#' + view.getIdButton()).click(displayView);
+
   view.display();
 
-  views[prefix].push(tabDiv);
+  views[prefix].push(view);
 }
 
 function addAction(prefix, name, icon, actionFunction)
@@ -45,7 +44,16 @@ function addAction(prefix, name, icon, actionFunction)
   $('#' + btnAction.getIdButton()).click(actionFunction);
 }
 
+function refreshTabContent(prefix)
+{
+  for(let i = 0; i < views[prefix].length; i++)
+  {
+    views[prefix][i].display();
+  }
+}
+
 module.exports.displayView = displayView;
 module.exports.addView = addView;
 module.exports.addAction = addAction;
 module.exports.views = views;
+module.exports.refreshTabContent = refreshTabContent;

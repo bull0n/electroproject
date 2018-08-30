@@ -1,11 +1,11 @@
-let AbstractView = require('../../abstract-view-class.js');
+let AbstractTabContentView = require('../../abstract-tab-content-view.js');
 let {Project, Task, Member} = require('../../data/project.js');
 
-class ListTasks extends AbstractView
+class ListTasks extends AbstractTabContentView
 {
-  constructor(element, project, prefix)
+  constructor(element, project, prefix, icon)
   {
-    super(element);
+    super(element, project, prefix, icon);
     this.project = project
     this.listTasks = this.project.tasks;
     this.prefix = prefix;
@@ -38,7 +38,7 @@ class ListTasks extends AbstractView
       </div>
     `;
 
-    $(this.element).html(htmlText);
+    $('#'+this.getIdContentDiv()).html(htmlText);
     this.addEvent();
   }
 
@@ -61,9 +61,11 @@ class ListTasks extends AbstractView
         }
       }
 
+
+
       htmlText += `<tr>
         <th scope="row">${task.name}</th>
-        <td>${task.inCharge.name}</td>
+        <td>${task.inCharge !== undefined ? task.inCharge.name : ''}</td>
         <td>${peopleAssigned}</td>
         <td>${task.from.toLocaleDateString()}</td>
         <td>${task.to.toLocaleDateString()}</td>
@@ -97,10 +99,11 @@ class ListTasks extends AbstractView
       Modal.show('Confirmation needed', `
         <p>Do you really want to delete this tasks?<p>
         <strong>${project.tasks[iTask].name}</strong>
-      `, function()
+      `, () =>
       {
+
         project.tasks.splice(iTask, 1);
-        taskView.display();
+        refreshTabContent(taskView.prefix);
       });
     }
 
@@ -128,6 +131,7 @@ class ListTasks extends AbstractView
       Modal.show(title, formTask.display(), function()
       {
         FormTask.save(formTask, isEdit);
+        refreshTabContent(taskView.prefix);
       });
     }
 

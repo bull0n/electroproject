@@ -8,7 +8,14 @@ class Member
 
   equals(member)
   {
-    return member.name === this.name && member.color === this.color;
+    if(member !== undefined)
+    {
+      return member.name === this.name && member.color === this.color;
+    }
+    else
+    {
+        return false;
+    }
   }
 }
 

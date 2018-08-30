@@ -1,16 +1,14 @@
 // Imports
-let AbstractView = require('../../abstract-view-class.js');
+let AbstractTabContentView = require('../../abstract-tab-content-view.js');
 let {Project, Task, Member} = require('../../data/project.js');
 let Modal = require('../modal/modal.js');
 let SerializerTool = require('../../tools/serializertool.js');
 
-class ListMembers extends AbstractView
+class ListMembers extends AbstractTabContentView
 {
-  constructor(element, project, prefix)
+  constructor(element, project, prefix, icon)
   {
-    super(element);
-    this.project = project;
-    this.prefix = prefix;
+    super(element, project, prefix, icon);
     //this.project.team = SerializerTool.unserializeFromFile("./team.epd");  // Tests
   }
 
@@ -42,7 +40,7 @@ class ListMembers extends AbstractView
     </div>
     `;
 
-    $(this.element).html(htmlText);
+    $('#'+this.getIdContentDiv()).html(htmlText);
     this.addEvent();
   }
 
@@ -81,9 +79,9 @@ class ListMembers extends AbstractView
 
     let addMemberClickEvent = function(event)
     {
-      let ConfirmModal = require('../modal/modal.js');
+      let Modal = require('../modal/modal.js');
 
-      ConfirmModal.show('Add member', listMembers.getHTMLFormFunc(), function() { listMembers.addMemberConfirm(); });
+      Modal.show('Add member', listMembers.getHTMLFormFunc(), function() { listMembers.addMemberConfirm(); });
     };
 
     $(`#${this.prefix}-add-member`).click(addMemberClickEvent);
@@ -120,7 +118,7 @@ class ListMembers extends AbstractView
     member.name = name;
     this.project.team.push(member);
 
-    this.display();
+    refreshTabContent(this.prefix);
   }
 
   modifyMemberConfirm(member)
@@ -131,7 +129,7 @@ class ListMembers extends AbstractView
     member.color = color;
     member.name = name;
 
-    this.display();
+    refreshTabContent(this.prefix);
   }
 
   removeMemberConfirm(index)
@@ -158,7 +156,7 @@ class ListMembers extends AbstractView
       }
     }
 
-    this.display();
+    refreshTabContent(this.prefix);
   }
 
   getHTMLFormFunc(color = '', name = '')
