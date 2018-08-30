@@ -36,29 +36,35 @@ class Home extends AbstractView
   {
     let currentClass = this;
 
-    let newProjectClickEvent = function(event)
-    {
-      // Open an empty project directly or open the save dialog ?
-    };
-
+    let newProjectClickEvent = this.newProject;
     let openProjectClickEvent = this.openProject;
-
     let quitAppClickEvent = this.quitApp;
 
-    $('#btn-new-project').click(newProjectClickEvent);
-    $('#btn-open-project').click(openProjectClickEvent);
-    $('#btn-quit-app').click(quitAppClickEvent);
+    $('#btn-new-project').click({source:this}, newProjectClickEvent);
+    $('#btn-open-project').click({source:this}, openProjectClickEvent);
+    $('#btn-quit-app').click({source:this}, quitAppClickEvent);
   }
 
-  newProject()
+  newProject(event)
   {
     let tabView = new TabView($('#content-container'));
+    let project = new Project();
+    let ConfirmModal = require('../modal/modal.js');
+    let source = event.data.source;
 
-    tabView.display();
-    tabView.createTab(new Project());
+    ConfirmModal.show('New project', source.getHTMLProjectNameForm(), function()
+    {
+      let tabView = new TabView($('#content-container'));
+
+      project.name = $('#txt_project_name').val();
+
+      source.display();
+      tabView.display();
+      tabView.createTab(project);
+    });
   }
 
-  openProject()
+  openProject(event)
   {
     const {app} = require('electron').remote;
 
@@ -70,10 +76,22 @@ class Home extends AbstractView
     tabView.createTab(project);
   }
 
-  quitApp()
+  quitApp(event)
   {
     const {app} = require('electron').remote;
     app.quit();
+  }
+
+  getHTMLProjectNameForm()
+  {
+    let htmlText = `
+    <div class="form-group">
+      <label for="txt_name">Name</label>
+      <input type="text" id="txt_project_name" name="name" value="${name}" class="form-control" placeholder="name">
+    </div>
+    `;
+
+    return htmlText;
   }
 }
 
