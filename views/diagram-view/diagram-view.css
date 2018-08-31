@@ -4,28 +4,30 @@
   margin-right: 50px;
   user-select: none;
 }
-.row-planning
+.row-planning:hover
 {
-  border-left: 1px solid #999;
+  background-color: rgba(0,0,0, 0.1);
+
 }
 .separator-container {
   display: flex;
   position: absolute;
-  z-index: -1;
   padding-left: 299px;
-  padding-top: 34px;
-  border-top: 1px solid #999;
-  border-left: 1px solid #999;
-  border-bottom: 1px solid #999;
+  padding-top: 42px;
+  border-top: 1px solid #CCC;
+  border-left: 1px solid #CCC;
+  border-bottom: 1px solid #CCC;
+  z-index: -1;
 }
 
 .separator-planning
 {
-  border-left: 1px solid #BBB;
+  border-left: 1px solid #CCC;
+
 }
 .separator-planning:last-child, .row-planning:nth-child(2)
 {
-  border-right: 1px solid #BBB;
+  border-right: 1px solid #CCC;
 }
 
 .row-planning.title-planning
@@ -34,7 +36,7 @@
 }
 .row-planning:nth-child(2)
 {
-  border-bottom: 2px solid #999;
+  border-bottom: 2px solid #CCC;
 }
 .row-planning
 {
@@ -44,9 +46,9 @@
 }
 .planning-label
 {
-  padding: 5px;
-  height: 34px;
-  border-bottom: 1px solid #999;
+  padding: 8px;
+  height: 42px;
+  border-bottom: 1px solid #CCC;
 }
 .planning-title
 {
@@ -55,11 +57,10 @@
 .task-name
 {
   width: 130px;
-  border-right: 1px solid #999;
 }
 .task-name, .in-charge, .row-planning:last-child > .btn-group
 {
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #CCC;
 }
 .in-charge
 {
@@ -70,9 +71,9 @@
   background-color: red;
   height: 28px;
   width: 30px;
-  padding-top: 3px;
+  margin-top: 6px;
   margin-left: 60px;
-  border-radius: 3px;
+  border-radius: 5px;
   border: 1px solid #999;
 }
 .btn-dropdown-planning, .row-planning > button
@@ -96,7 +97,7 @@
 
 .left-handle, .right-handle
 {
-  background-color: green;
+  /*background-color: green;*/
   width: 14px;
   height: 24px;
   margin-top: -2px;
