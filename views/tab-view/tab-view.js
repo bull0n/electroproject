@@ -27,15 +27,15 @@ class TabView extends AbstractView
 
   createTab(project)
   {
-    let fileNameLower = project.name.toLowerCase();
-    fileNameLower = fileNameLower.replace(' ', '-');  // To improve ...
-    let projectName = project.name;
+    let tag = project.name.toLowerCase();
+    tag = tag.replace(' ', '-');
+    tag += '_' + Date.now();          // Use timestamp for unique node name
 
     let li = document.createElement('li');
-    let textNode = document.createTextNode(projectName);
+    let textNode = document.createTextNode(project.name);
     li.appendChild(textNode);
     li.className = 'tab';
-    li.id = 'tab-' + fileNameLower;
+    li.id = 'tab-' + tag;
 
     li.addEventListener('click', function(e) {
       makeActive(e.target.id);
@@ -45,15 +45,15 @@ class TabView extends AbstractView
 
     let divContent = document.createElement('div');
     divContent.className = 'tab-content';
-    divContent.id = 'content-' + fileNameLower;
+    divContent.id = 'content-' + tag;
     this.divsContent.appendChild(divContent);
 
     let TabContent = require('../tab-content/tab-content.js');
 
-    let tabContent = new TabContent($(divContent), project, fileNameLower);
+    let tabContent = new TabContent($(divContent), project, tag);
     tabContent.display();
 
-    listTab.push(fileNameLower);
+    listTab.push(tag);
 
     makeActive(li.id);
   }
