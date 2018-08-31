@@ -1,11 +1,11 @@
-let AbstractView = require('../../abstract-view-class.js');
+let AbstractTabContentView = require('../../abstract-tab-content-view.js');
 let {Project, Task, Member} = require('../../data/project.js');
 
-class ListTasks extends AbstractView
+class ListTasks extends AbstractTabContentView
 {
-  constructor(element, project, prefix)
+  constructor(element, project, prefix, icon)
   {
-    super(element);
+    super(element, project, prefix, icon);
     this.project = project
     this.listTasks = this.project.tasks;
     this.prefix = prefix;
@@ -38,14 +38,13 @@ class ListTasks extends AbstractView
       </div>
     `;
 
-    $(this.element).html(htmlText);
+    $('#'+this.getIdContentDiv()).html(htmlText);
     this.addEvent();
   }
 
   getHTMLLists()
   {
     let htmlText = '';
-
     for(let i = 0; i < this.listTasks.length; i++)
     {
       let task = this.listTasks[i];
@@ -61,9 +60,11 @@ class ListTasks extends AbstractView
         }
       }
 
+
+
       htmlText += `<tr>
         <th scope="row">${task.name}</th>
-        <td>${task.inCharge.name}</td>
+        <td>${task.inCharge !== undefined ? task.inCharge.name : ''}</td>
         <td>${peopleAssigned}</td>
         <td>${task.from.toLocaleDateString()}</td>
         <td>${task.to.toLocaleDateString()}</td>
@@ -97,10 +98,11 @@ class ListTasks extends AbstractView
       Modal.show('Confirmation needed', `
         <p>Do you really want to delete this tasks?<p>
         <strong>${project.tasks[iTask].name}</strong>
-      `, function()
+      `, () =>
       {
+
         project.tasks.splice(iTask, 1);
-        taskView.display();
+        refreshTabContent(taskView.prefix);
       });
     }
 
@@ -127,26 +129,8 @@ class ListTasks extends AbstractView
 
       Modal.show(title, formTask.display(), function()
       {
-        let task = formTask.task;
-        task.name = $('#task-name-input').val();
-        task.from = new Date($('#from-input').val());
-        task.to = new Date($('#to-input').val());
-
-        task.inCharge = project.team[$('#in-charge-input').val()];
-
-        task.workingOn = [];
-        let indexWorkingOn = $('#working-on-input').val();
-
-        for(let i = 0; i < indexWorkingOn.length; i++)
-        {
-          task.workingOn.push(project.team[indexWorkingOn[i]]);
-        }
-
-        if(!isEdit)
-        {
-          project.tasks.push(task);
-        }
-        taskView.display();
+        FormTask.save(formTask, isEdit);
+        refreshTabContent(taskView.prefix);
       });
     }
 

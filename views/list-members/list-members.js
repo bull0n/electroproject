@@ -1,17 +1,14 @@
 // Imports
-let AbstractView = require('../../abstract-view-class.js');
+let AbstractTabContentView = require('../../abstract-tab-content-view.js');
 let {Project, Task, Member} = require('../../data/project.js');
-let Modal = require('../modal/modal.js')
+let Modal = require('../modal/modal.js');
 let SerializerTool = require('../../tools/serializertool.js');
 
-class ListMembers extends AbstractView
+class ListMembers extends AbstractTabContentView
 {
-  constructor(element, project, prefix)
+  constructor(element, project, prefix, icon)
   {
-    super(element);
-    this.project = project;
-    this.prefix = prefix;
-    //this.project.team = SerializerTool.unserializeFromFile("./team.epd");  // Tests
+    super(element, project, prefix, icon);
   }
 
   display()
@@ -42,7 +39,7 @@ class ListMembers extends AbstractView
     </div>
     `;
 
-    $(this.element).html(htmlText);
+    $('#'+this.getIdContentDiv()).html(htmlText);
     this.addEvent();
   }
 
@@ -81,9 +78,9 @@ class ListMembers extends AbstractView
 
     let addMemberClickEvent = function(event)
     {
-      let ConfirmModal = require('../modal/modal.js');
+      let Modal = require('../modal/modal.js');
 
-      ConfirmModal.show('Add member', listMembers.getHTMLFormFunc(), function() { listMembers.addMemberConfirm(); });
+      Modal.show('Add member', listMembers.getHTMLFormFunc(), function() { listMembers.addMemberConfirm(); });
     };
 
     $(`#${this.prefix}-add-member`).click(addMemberClickEvent);
@@ -120,7 +117,7 @@ class ListMembers extends AbstractView
     member.name = name;
     this.project.team.push(member);
 
-    this.display();
+    refreshTabContent(this.prefix);
   }
 
   modifyMemberConfirm(member)
@@ -131,14 +128,34 @@ class ListMembers extends AbstractView
     member.color = color;
     member.name = name;
 
-    this.display();
+    refreshTabContent(this.prefix);
   }
 
   removeMemberConfirm(index)
   {
+    let member = this.project.team[index];
+
     this.project.team.splice(index, 1);
 
-    this.display();
+    for(let i = 0; i < this.project.tasks.length; i++)
+    {
+      let task = this.project.tasks[i];
+
+      if(member.equals(task.inCharge))
+      {
+        task.inCharge = undefined;
+      }
+
+      for(let j = 0; j < task.workingOn.length; j++)
+      {
+        if(task.workingOn[j].equals(member))
+        {
+          task.workingOn.splice(j, 1);
+        }
+      }
+    }
+
+    refreshTabContent(this.prefix);
   }
 
   getHTMLFormFunc(color = '', name = '')

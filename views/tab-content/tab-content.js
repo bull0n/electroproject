@@ -1,63 +1,42 @@
 let AbstractView = require('../../abstract-view-class.js');
 let {Project, Task, Member} = require('../../data/project.js');
+let DiagramView = require('../diagram-view/diagram-view.js');
 let ListTasks = require('../list-tasks/list-tasks.js');
 let ListMembers = require('../list-members/list-members.js');
+let FileDialog = require('../file-dialog/file-dialog.js');
 
 class TabContent extends AbstractView
 {
-  constructor(element, fileName, prefix)
+  constructor(element, project, prefix)
   {
     super(element);
-    this.project = new Project();
+    this.project = project;
     this.prefix = prefix;
-
-    let lucas = new Member();
-    lucas.name = 'lucas';
-    lucas.color = 'black';
-
-    let malik = new Member();
-    malik.name = 'malik';
-    malik.color = 'red';
-
-    let task1 = new Task();
-    task1.name = 'task1';
-    task1.from = new Date();
-    task1.to = new Date();
-    task1.inCharge = lucas;
-    task1.workingOn = [lucas, malik];
-    task1.finished = false;
-
-    let task2 = new Task();
-    task2.name = 'task2';
-    task2.from = new Date();
-    task2.to = new Date();
-    task2.inCharge = malik;
-    task2.workingOn = [lucas, malik];
-    task2.finished = true;
-
-    this.project.name = 'projet de la mort'
-    this.project.team = [lucas, malik];
-    this.project.tasks = [task1, task2];
-
   }
 
   display()
   {
     let {displayView, addView, addAction, views} = require('./create-tab-functions.js');
+    let project = this.project;
 
     views[this.prefix] = [];
 
     this.createBasicStructure();
 
-    //addView(this.prefix, 'Diagram', '<i class="fas fa-equals"></i>', ListTasks, this.project);
-    addView(this.prefix, 'Tasks', '<i class="fas fa-tasks"></i>', ListTasks, this.project);
-    addView(this.prefix, 'Team', '<i class="fas fa-users"></i>', ListMembers, this.project);
+    addView(this.prefix, 'Diagram', '<i class="fas fa-equals"></i>', DiagramView, project);
+    addView(this.prefix, 'Tasks', '<i class="fas fa-tasks"></i>', ListTasks, project);
+    addView(this.prefix, 'Team', '<i class="fas fa-users"></i>', ListMembers, project);
 
-    addAction(this.prefix, 'Save', '<i class="fas fa-save"></i>', function() { console.log('hello world'); });
+    addAction(this.prefix, 'Save', '<i class="fas fa-save"></i>', function() {
+      const {app} = require('electron').remote; // ??
+      let directory = app.getPath('documents');
+      FileDialog.saveAs(project, directory); // parent should be passed but can't get the global win ...
+    });
 
     $('#'+ views[this.prefix][0].getIdButton()).click();
   }
 
+  // create the basic structure of a tab view
   createBasicStructure()
   {
     $(this.element).html(`

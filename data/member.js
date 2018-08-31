@@ -1,14 +1,21 @@
 class Member
 {
-  constructor()
+  constructor(color = '', name = '')
   {
-    this.name = '';
-    this.color = '';
+    this.color = color;
+    this.name = name;
   }
 
   equals(member)
   {
-    return member.name === this.name && member.color === this.color;
+    if(member !== undefined)
+    {
+      return member.name === this.name && member.color === this.color;
+    }
+    else
+    {
+        return false;
+    }
   }
 }
 
