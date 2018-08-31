@@ -10,6 +10,7 @@ class Task
     this.inCharge = undefined; // type member
     this.workingOn = []; //type member
     this.finished = false;
+    this.key = crypto.getRandomValues(new Uint32Array(4)).join('-');
   }
 
   isWorkingOn(member)

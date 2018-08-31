@@ -83,6 +83,19 @@ class Project
 
     return tasks;
   }
+
+  findTask(key)
+  {
+    for(let i = 0; i < this.tasks.length; i++)
+    {
+      if(this.tasks[i].key == key)
+      {
+        return this.tasks[i];
+      }
+    }
+
+    return undefined;
+  }
 }
 
 module.exports.Project = Project;

@@ -38,7 +38,21 @@ class DragNDropManager
     if(this.elementPushed !== undefined)
     {
       let mouseMovedPixels = event.pageX - this.xCoordinates;
-      let daysMovement = mouseMovedPixels / this.widthDay;
+      let daysMovement = Math.floor(mouseMovedPixels / this.widthDay);
+
+      let keyTask = $(this.elementPushed).parent().parent().parent().attr('data-key-task');
+      let task = this.project.findTask(keyTask);
+
+      if($(this.elementPushed).hasClass('left-handle'))
+      {
+        task.from.setDate(task.from.getDate() + daysMovement);
+      }
+      else if($(this.elementPushed).hasClass('right-handle'))
+      {
+        task.to.setDate(task.to.getDate() + daysMovement);
+      }
+
+      refreshTabContent(this.prefix);
     }
 
     this.elementPushed = undefined;

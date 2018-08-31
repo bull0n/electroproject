@@ -73,7 +73,7 @@ class DiagramView extends AbstractTabContentView
       let daysFromStart = Math.floor((task.from - this.project.from()) / MS_IN_DAYS);
 
       htmlTasks += `
-      <div class="row-planning task ${this.prefix}-task" id="${this.prefix}-${task.name.toLowerCase()}">
+      <div class="row-planning task ${this.prefix}-task" id="${this.prefix}-${task.name.toLowerCase()}" data-key-task="${task.key}">
         <div class="task-name planning-label">
           ${task.name.toLowerCase()}
         </div>
@@ -123,7 +123,7 @@ class DiagramView extends AbstractTabContentView
       Modal.show(title, formTask.display(), function()
       {
         FormTask.save(formTask, false);
-        diagramView.display();
+        refreshTabContent(taskView.prefix);
       });
     }
 
