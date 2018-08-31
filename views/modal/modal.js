@@ -4,7 +4,7 @@ class Modal
   // only one modal can exist
   static display(elementTarget)
   {
-    if($('#main-modal') === undefined)
+    if($('#main-modal').length == 0)
     {
       let htmlContent = `
       <div class="modal fade" tabindex="-1" role="dialog" id="main-modal" aria-labelledby="main-modal" aria-hidden="true">
