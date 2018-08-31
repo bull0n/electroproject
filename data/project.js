@@ -34,7 +34,7 @@ class Project
     {
       if(this.tasks[i].to > to || to === undefined)
       {
-        to = this.tasks[i].from;
+        to = this.tasks[i].to;
       }
     }
 
