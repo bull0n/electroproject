@@ -1,4 +1,5 @@
 let AbstractTabContentView = require('../../abstract-tab-content-view.js');
+let DragNDropManager = require('./dragndrop-manager.js');
 
 const MS_IN_DAYS = 86400000;
 
@@ -8,8 +9,9 @@ class DiagramView extends AbstractTabContentView
   {
     super(element, project, prefix, icon);
     this.WIDTH_DAY = 30; // in pixels
+    this.dragndrop = new DragNDropManager(this.prefix, this.constructor.name.toLowerCase(), this.project, this.WIDTH_DAY);
   }
-  
+
   display(filter = undefined)
   {
     let htmlText = `
@@ -53,8 +55,9 @@ class DiagramView extends AbstractTabContentView
     `;
 
     $('#'+this.getIdContentDiv()).html(htmlText);
-
     this.addEvent();
+
+    this.dragndrop.display();
   }
 
   // build the html for every tasks
@@ -70,7 +73,7 @@ class DiagramView extends AbstractTabContentView
       let daysFromStart = Math.floor((task.from - this.project.from()) / MS_IN_DAYS);
 
       htmlTasks += `
-      <div class="row-planning task" id="${this.prefix}-${task.name.toLowerCase()}">
+      <div class="row-planning task ${this.prefix}-task" id="${this.prefix}-${task.name.toLowerCase()}" data-key-task="${task.key}">
         <div class="task-name planning-label">
           ${task.name.toLowerCase()}
         </div>
@@ -78,7 +81,8 @@ class DiagramView extends AbstractTabContentView
           ${task.inCharge !== undefined ? task.inCharge.name : ''}
         </div>
         <div class="period-container">
-          <div class="period" style="width: ${(task.getLengthInDays()+1) * this.WIDTH_DAY}px; margin-left: ${daysFromStart * this.WIDTH_DAY}px; background-color: ${task.inCharge !== undefined ? task.inCharge.color : 'DeepSkyBlue'}"></div>
+          <div class="period" style="width: ${(task.getLengthInDays()+1) * this.WIDTH_DAY}px; margin-left: ${daysFromStart * this.WIDTH_DAY}px; background-color: ${task.inCharge !== undefined ? task.inCharge.color : 'DeepSkyBlue'}">
+          </div>
         </div>
       </div>`;
     }
@@ -119,7 +123,7 @@ class DiagramView extends AbstractTabContentView
       Modal.show(title, formTask.display(), function()
       {
         FormTask.save(formTask, false);
-        diagramView.display();
+        refreshTabContent(taskView.prefix);
       });
     }
 
@@ -144,8 +148,6 @@ class DiagramView extends AbstractTabContentView
 
       diagramView.display({member: member});
     };
-
-    filterMemberClick.bind(this);
 
     $(`.${this.prefix}-filter-member`).click(filterMemberClick);
 
