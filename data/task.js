@@ -1,3 +1,5 @@
+const MS_IN_DAYS = 86400000;
+
 class Task
 {
   constructor()
@@ -20,6 +22,11 @@ class Task
       }
     }
     return false;
+  }
+
+  getLengthInDays()
+  {
+    return Math.floor((this.to - this.from) / MS_IN_DAYS);
   }
 }
 

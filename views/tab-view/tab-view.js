@@ -58,12 +58,14 @@ class TabView extends AbstractView
     makeActive(li.id);
   }
 
+  // add the html to the dom
   display()
   {
     $(this.element).html(`
       <link rel="stylesheet" href="views/tab-view/tab-view.css">
       <link rel="stylesheet" href="views/tab-content/tab-content.css">
       <link rel="stylesheet" href="views/list-tasks/list-tasks.css">
+      <link rel="stylesheet" href="views/diagram-view/diagram-view.css">
 
       <ul id="tabs">
       </ul>

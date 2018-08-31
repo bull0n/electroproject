@@ -1,5 +1,6 @@
 let AbstractView = require('../../abstract-view-class.js');
 let {Project, Task, Member} = require('../../data/project.js');
+let DiagramView = require('../diagram-view/diagram-view.js');
 let ListTasks = require('../list-tasks/list-tasks.js');
 let ListMembers = require('../list-members/list-members.js');
 let FileDialog = require('../file-dialog/file-dialog.js');
@@ -22,7 +23,7 @@ class TabContent extends AbstractView
 
     this.createBasicStructure();
 
-    //addView(this.prefix, 'Diagram', '<i class="fas fa-equals"></i>', ListTasks, this.project);
+    addView(this.prefix, 'Diagram', '<i class="fas fa-equals"></i>', DiagramView, project);
     addView(this.prefix, 'Tasks', '<i class="fas fa-tasks"></i>', ListTasks, project);
     addView(this.prefix, 'Team', '<i class="fas fa-users"></i>', ListMembers, project);
 
@@ -35,6 +36,7 @@ class TabContent extends AbstractView
     $('#'+ views[this.prefix][0].getIdButton()).click();
   }
 
+  // create the basic structure of a tab view
   createBasicStructure()
   {
     $(this.element).html(`

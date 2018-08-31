@@ -3,6 +3,7 @@
   display: grid;
   grid-template-columns:72px auto;
   grid-template-rows: 100%;
+  height: 100%;
 }
 
 .left-button
@@ -26,6 +27,15 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
+}
+
+.active-btn-view {
+  border: 2px solid #999;
+}
+
+.btn-content:hover{
+  border: 2px solid #555;
 }
 
 .btn-content > p
