@@ -45,7 +45,6 @@ class ListTasks extends AbstractTabContentView
   getHTMLLists()
   {
     let htmlText = '';
-
     for(let i = 0; i < this.listTasks.length; i++)
     {
       let task = this.listTasks[i];

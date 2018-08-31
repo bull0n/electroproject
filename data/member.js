@@ -1,9 +1,9 @@
 class Member
 {
-  constructor()
+  constructor(color = '', name = '')
   {
-    this.name = '';
-    this.color = '';
+    this.color = color;
+    this.name = name;
   }
 
   equals(member)

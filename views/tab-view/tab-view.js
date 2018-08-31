@@ -18,21 +18,24 @@ class TabView extends AbstractView
     this.divsContent = undefined;
   }
 
+  /*
   addFile(fileName)
   {
     this.createTab(fileName);
   }
+  */
 
-  // create a tab and all event needed
-  createTab(fileName)
+  createTab(project)
   {
-    let fileNameLower = fileName.toLowerCase();
+    let tag = project.name.toLowerCase();
+    tag = tag.replace(' ', '-');
+    tag += '_' + Date.now();          // Use timestamp for unique node name
 
     let li = document.createElement('li');
-    let textNode = document.createTextNode(fileName);
+    let textNode = document.createTextNode(project.name);
     li.appendChild(textNode);
     li.className = 'tab';
-    li.id = 'tab-' + fileNameLower;
+    li.id = 'tab-' + tag;
 
     li.addEventListener('click', function(e) {
       makeActive(e.target.id);
@@ -42,15 +45,15 @@ class TabView extends AbstractView
 
     let divContent = document.createElement('div');
     divContent.className = 'tab-content';
-    divContent.id = 'content-' + fileNameLower;
+    divContent.id = 'content-' + tag;
     this.divsContent.appendChild(divContent);
 
     let TabContent = require('../tab-content/tab-content.js');
 
-    let tabContent = new TabContent($(divContent), '', fileNameLower);
+    let tabContent = new TabContent($(divContent), project, tag);
     tabContent.display();
 
-    listTab.push(fileName);
+    listTab.push(tag);
 
     makeActive(li.id);
   }
@@ -72,7 +75,6 @@ class TabView extends AbstractView
     this.ulTabs = document.getElementById('tabs');
     this.divsContent = document.getElementById('tab-content');
 
-    this.addFile('salut');
     // tabView.addFile('Bonjour');
 
     //adapt the height of the div to the full width
@@ -94,6 +96,7 @@ function makeActive(idTab)
   for (i = 0; i < listTab.length; i++)
   {
     let tab = document.getElementById((ID_TAB_PREFIX + listTab[i]).toLowerCase());
+    console.log(tab);
     tab.className = tab.className.replace(ACTIVE_TAB_CLASS, '');
 
     let content = document.getElementById((ID_CONTENT_PREFIX + listTab[i]).toLowerCase());

@@ -9,7 +9,6 @@ class ListMembers extends AbstractTabContentView
   constructor(element, project, prefix, icon)
   {
     super(element, project, prefix, icon);
-    //this.project.team = SerializerTool.unserializeFromFile("./team.epd");  // Tests
   }
 
   display()
