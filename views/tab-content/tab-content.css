@@ -9,6 +9,8 @@
 .left-button
 {
   width: 72px;
+  background-color: #EDEDED;
+  border-right: 1px solid #BBB;
 }
 
 .left-button, .content
@@ -20,7 +22,7 @@
 {
   margin: 5px;
   border-radius: 30px;
-  border: 1px solid black;
+  border: 1px solid #444;
   text-align: center;
   width: 60px;
   height: 60px;
@@ -28,10 +30,11 @@
   flex-direction: column;
   justify-content: center;
   cursor: pointer;
+  background-color: #CCC;
 }
 
 .active-btn-view {
-  border: 2px solid #999;
+  border: 2px solid #777;
 }
 
 .btn-content:hover{
@@ -61,5 +64,5 @@
 
 .content
 {
-  padding: 5px 0 0 15px;
+  padding: 15px 0 0 30px;
 }

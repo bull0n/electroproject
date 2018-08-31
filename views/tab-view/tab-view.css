@@ -8,14 +8,22 @@
 {
   display : inline-block;
   width: 250px;
-  border: 1px solid black;
+  border-right: 2px solid #999;
+  border-bottom: 2px solid #999;
   text-align: center;
   padding: 4px;
+}
+.tab i
+{
+  float: right;
+  margin-top: 4px;
+  margin-right: 10px;
+  color: #555;
+  cursor: pointer;
 }
 
 .tab-content
 {
-  padding-top: 20px;
   display : none;
   height: 100%;
 }
@@ -27,5 +35,5 @@
 
 .active-tab
 {
-  color: red;
+  font-weight: bold;
 }

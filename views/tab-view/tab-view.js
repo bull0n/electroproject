@@ -34,6 +34,11 @@ class TabView extends AbstractView
     let li = document.createElement('li');
     let textNode = document.createTextNode(project.name);
     li.appendChild(textNode);
+
+    let iconNode = document.createElement('i');
+    iconNode.className = 'fas fa-times';
+    li.appendChild(iconNode);
+
     li.className = 'tab';
     li.id = 'tab-' + tag;
 
@@ -96,7 +101,6 @@ function makeActive(idTab)
   for (i = 0; i < listTab.length; i++)
   {
     let tab = document.getElementById((ID_TAB_PREFIX + listTab[i]).toLowerCase());
-    console.log(tab);
     tab.className = tab.className.replace(ACTIVE_TAB_CLASS, '');
 
     let content = document.getElementById((ID_CONTENT_PREFIX + listTab[i]).toLowerCase());

@@ -30,7 +30,6 @@ class FileDialog
       let revive = function(projectObject)
       {
         let realProject = new Project();
-        console.log(projectObject.name);
         realProject.name = projectObject.name;
         realProject.filename = projectObject.filename;
         realProject.team = projectObject.team;
