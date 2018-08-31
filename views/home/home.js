@@ -66,10 +66,10 @@ class Home extends AbstractView
 
   openProject(event)
   {
-    const {app} = require('electron').remote;
+    const {app, BrowserWindow} = require('electron').remote;
 
     let directory = app.getPath('documents');
-    let project = FileDialog.open(directory);
+    let project = FileDialog.open(directory, BrowserWindow.getFocusedWindow());
     let tabView = new TabView($('#content-container'));
 
     tabView.display();
