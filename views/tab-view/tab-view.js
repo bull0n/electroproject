@@ -32,12 +32,17 @@ class TabView extends AbstractView
     iconNode.className = 'fas fa-times';
     li.appendChild(iconNode);
 
+    $(iconNode).click(function(event) {
+      closeTab($(event.currentTarget).parent());
+      event.stopPropagation();
+    });
+
     li.className = 'tab';
     li.id = 'tab-' + tag;
 
-    li.addEventListener('click', function(e) {
-      makeActive(e.target.id);
-    }, true);
+    $(li).click(function(event) {
+      makeActive(event.currentTarget.id);
+    });
 
     this.ulTabs.appendChild(li);
 
@@ -72,8 +77,6 @@ class TabView extends AbstractView
 
     this.ulTabs = document.getElementById('tabs');
     this.divsContent = document.getElementById('tab-content');
-
-    // tabView.addFile('Bonjour');
 
     //adapt the height of the div to the full width
     $(window).resize(function()
@@ -115,6 +118,32 @@ function makeActive(idTab)
   document.getElementById(idTab).className += ACTIVE_TAB_CLASS;
   let idContent = idTab.replace(ID_TAB_PREFIX, ID_CONTENT_PREFIX);
   document.getElementById(idContent).className += ACTIVE_CONTENT_CLASS;
+}
+
+function closeTab(elementTab)
+{
+  let idTab = $(elementTab).attr('id').replace('tab-', '');
+  let iTab = listTab.indexOf(idTab)
+  listTab.splice(iTab, 1);
+  $(`#${ID_TAB_PREFIX}${idTab}`).remove();
+  $(`#${ID_CONTENT_PREFIX}${idTab}`).remove();
+
+  if(listTab.length <= 0)
+  {
+    let Home = require('../../views/home/home.js');
+    let home = new Home($('#content-container'));
+
+    home.display();
+  }
+  else
+  {
+    if(iTab == listTab.length)
+    {
+      iTab--;
+    }
+
+    makeActive(ID_TAB_PREFIX + listTab[iTab]);
+  }
 }
 
 module.exports = TabView;

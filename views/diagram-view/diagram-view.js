@@ -123,7 +123,7 @@ class DiagramView extends AbstractTabContentView
       Modal.show(title, formTask.display(), function()
       {
         FormTask.save(formTask, false);
-        refreshTabContent(taskView.prefix);
+        refreshTabContent(diagramView.prefix);
       });
     }
 
