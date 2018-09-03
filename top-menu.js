@@ -58,6 +58,7 @@ class TopMenu
   newProject()
   {
     let currentInstance = TopMenu.instance;
+    let tabViewExists = TabView.instance !== null;
     let tabView = TabView.getInstance();
     let project = new Project();
 
@@ -65,7 +66,10 @@ class TopMenu
     {
       project.name = $('#txt_project_name').val();
 
-      tabView.display();
+      if(!tabViewExists)
+      {
+        tabView.display();
+      }
       tabView.createTab(project);
     });
   }
@@ -74,9 +78,13 @@ class TopMenu
   {
     let directory = app.getPath('documents');
     let project = FileDialog.open(directory, BrowserWindow.getFocusedWindow());
+    let tabViewExists = TabView.instance !== null;
     let tabView = TabView.getInstance();
 
-    tabView.display();
+    if(!tabViewExists)
+    {
+      tabView.display();
+    }
     tabView.createTab(project);
   }
 
