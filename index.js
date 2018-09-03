@@ -16,10 +16,11 @@ const Modal = require('./views/modal/modal.js');
 
 $(document).ready(function()
 {
+  // Init. the top menu
+  TopMenu.getInstance();
+
   let Modal = require('./views/modal/modal.js');
   Modal.display($('#modal-container'));
-
-  TopMenu.create();
 
   let Home = require('./views/home/home.js');
   let home = new Home($('#content-container'));

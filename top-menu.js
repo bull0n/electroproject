@@ -2,8 +2,15 @@ const FileDialog = require("./views/file-dialog/file-dialog.js");
 
 class TopMenu
 {
-  static create()
+  constructor()
   {
+   this.create();
+  }
+
+  create()
+  {
+    let currentInstance = TopMenu.instance;
+
     let template = [{
         label: 'File',
         submenu: [
@@ -12,7 +19,7 @@ class TopMenu
             accelerator: 'Ctrl+n',
             click (item, focusedWindow)
             {
-              TopMenu.newProject();
+              currentInstance.newProject();
             }
           },
           {
@@ -20,7 +27,7 @@ class TopMenu
             accelerator: 'Ctrl+o',
             click (item, focusedWindow)
             {
-              TopMenu.openProject();
+              currentInstance.openProject();
             }
           },
           {
@@ -28,7 +35,7 @@ class TopMenu
             role: 'Ctrl+q',
             click (item, focusedWindow)
             {
-              TopMenu.quitApp();
+              currentInstance.quitApp();
             }
           }
         ]
@@ -50,13 +57,13 @@ class TopMenu
       Menu.setApplicationMenu(menu)
   }
 
-
-  static newProject()
+  newProject()
   {
+    let currentInstance = TopMenu.instance;
     let tabView = TabView.getInstance();
     let project = new Project();
 
-    Modal.show('New project', TopMenu.getHTMLProjectNameForm(), function()
+    Modal.show('New project', currentInstance.getHTMLProjectNameForm(), function()
     {
       project.name = $('#txt_project_name').val();
 
@@ -65,7 +72,7 @@ class TopMenu
     });
   }
 
-  static openProject()
+  openProject()
   {
     let directory = app.getPath('documents');
     let project = FileDialog.open(directory, BrowserWindow.getFocusedWindow());
@@ -75,12 +82,12 @@ class TopMenu
     tabView.createTab(project);
   }
 
-  static quitApp()
+  quitApp()
   {
     app.quit();
   }
 
-  static getHTMLProjectNameForm()
+  getHTMLProjectNameForm()
   {
     let htmlText = `
     <div class="form-group">
@@ -90,6 +97,16 @@ class TopMenu
     `;
 
     return htmlText;
+  }
+
+  static getInstance()
+  {
+    if(TopMenu.instance == null)
+    {
+      TopMenu.instance = new TopMenu();
+    }
+
+    return TopMenu.instance;
   }
 }
 

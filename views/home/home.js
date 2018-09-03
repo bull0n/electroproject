@@ -26,15 +26,15 @@ class Home extends AbstractView
 
   addEvent()
   {
-    let currentClass = this;
+    let topMenu = TopMenu.getInstance();
 
     let newProjectClickEvent = this.newProject;
     let openProjectClickEvent = this.openProject;
     let quitAppClickEvent = this.quitApp;
 
-    $('#btn-new-project').click(TopMenu.newProject);
-    $('#btn-open-project').click(TopMenu.openProject);
-    $('#btn-quit-app').click(TopMenu.quitApp);
+    $('#btn-new-project').click(topMenu.newProject);
+    $('#btn-open-project').click(topMenu.openProject);
+    $('#btn-quit-app').click(topMenu.quitApp);
   }
 }
 
