@@ -2,3 +2,8 @@ html, body, #content-container
 {
   height: 100%;
 }
+
+.hidden
+{
+  display: none;
+}

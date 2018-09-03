@@ -36,6 +36,11 @@ class FormTask extends AbstractView
 
     let htmlText = `
       <form action="javascript:0" id="form-add-task">
+        <div class="alert alert-danger hidden" role="alert">
+          <p class="font-weight-bold">The form is not valid !</p>
+          <p>Check it has a name and that the date are valid.</p>
+        </div>
+
         <div class="form-group">
           <label for="task-name-input">Task name : </label>
           <input type="text" class="form-control" id="task-name-input" name="task-name-input" placeholder="Enter the task's name" value="${this.task.name}" required>
@@ -56,6 +61,7 @@ class FormTask extends AbstractView
           </select>
         </div>
 
+
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="from-input">From : </label>
@@ -65,6 +71,13 @@ class FormTask extends AbstractView
             <label for="to-input">To : </label>
             <input type="date" class="form-control" id="to-input" name="to-input" value="${this.task.to.toISOString().substr(0, 10)}" required>
           </div>
+        </div>
+
+        <div class="custom-control custom-checkbox">
+          <input type="checkbox" class="form-check-input custom-control-input" value="true" id="finished-input" ${this.task.finished ? 'checked' : ''}>
+          <label class="custom-control-label" for="finished-input">
+          Finished
+          </label>
         </div>
       </form>
     `;
@@ -78,11 +91,23 @@ class FormTask extends AbstractView
     let task = formTask.task;
     let project = formTask.project;
 
-    task.name = $('#task-name-input').val();
-    task.from = new Date($('#from-input').val());
-    task.to = new Date($('#to-input').val());
+    let name = $('#task-name-input').val();
+    let from = new Date($('#from-input').val());
+    let to = new Date($('#to-input').val());
+
+    if(name == '' || to < from)
+    {
+      $('#form-add-task .alert').css('display', 'inherit');
+      return false;
+    }
+
+    task.name = name;
+    task.from = from;
+    task.to = to;
 
     task.inCharge = project.team[$('#in-charge-input').val()];
+
+    task.finished = $('#finished-input').prop('checked');
 
     task.workingOn = [];
     let indexWorkingOn = $('#working-on-input').val();
