@@ -105,6 +105,11 @@ class TopMenu
     return htmlText;
   }
 
+  save(project)
+  {
+    FileDialog.save(project);
+  }
+
   static getInstance()
   {
     if(TopMenu.instance == null)
