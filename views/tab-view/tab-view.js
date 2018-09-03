@@ -18,13 +18,6 @@ class TabView extends AbstractView
     this.divsContent = undefined;
   }
 
-  /*
-  addFile(fileName)
-  {
-    this.createTab(fileName);
-  }
-  */
-
   createTab(project)
   {
     let tag = project.name.toLowerCase();
@@ -93,7 +86,19 @@ class TabView extends AbstractView
       $(window).trigger('resize');
     });
   }
+
+  static getInstance()
+  {
+    if(TabView.instance == null)
+    {
+      TabView.instance = new TabView($('#content-container'));
+    }
+
+    return TabView.instance;
+  }
 }
+
+TabView.instance = null;
 
 //make the active tab
 function makeActive(idTab)
