@@ -170,7 +170,7 @@ class DiagramView extends AbstractTabContentView
       this.setSeparatorHeight();
     });
 
-    $(`#${this.prefix}-${this.constructor.name.toLowerCase()}-btn`).click(() =>
+    $(`#${this.prefix}-${this.constructor.name.toLowerCase()}-btn, #tab-${this.prefix}`).click(() =>
     {
       this.setSeparatorHeight();
     });

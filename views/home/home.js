@@ -74,11 +74,6 @@ class Home extends AbstractView
 
     tabView.display();
     tabView.createTab(project);
-
-    // test
-    let newProject = new Project();
-    newProject.name = 'Hello World';
-    tabView.createTab(newProject);
   }
 
   quitApp(event)
