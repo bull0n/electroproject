@@ -9,8 +9,6 @@ class TopMenu
 
   create()
   {
-    let currentInstance = TopMenu.instance;
-
     let template = [{
         label: 'File',
         submenu: [
@@ -19,7 +17,7 @@ class TopMenu
             accelerator: 'Ctrl+n',
             click (item, focusedWindow)
             {
-              currentInstance.newProject();
+              TopMenu.getInstance().newProject();
             }
           },
           {
@@ -27,7 +25,7 @@ class TopMenu
             accelerator: 'Ctrl+o',
             click (item, focusedWindow)
             {
-              currentInstance.openProject();
+              TopMenu.getInstance().openProject();
             }
           },
           {
@@ -35,7 +33,7 @@ class TopMenu
             role: 'Ctrl+q',
             click (item, focusedWindow)
             {
-              currentInstance.quitApp();
+              TopMenu.getInstance().quitApp();
             }
           }
         ]
