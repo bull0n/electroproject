@@ -49,10 +49,10 @@ class Home extends AbstractView
   {
     let tabView = new TabView($('#content-container'));
     let project = new Project();
-    let ConfirmModal = require('../modal/modal.js');
+    let Modal = require('../modal/modal.js');
     let source = event.data.source;
 
-    ConfirmModal.show('New project', source.getHTMLProjectNameForm(), function()
+    Modal.show('New project', source.getHTMLProjectNameForm(), function()
     {
       let tabView = new TabView($('#content-container'));
 
@@ -74,6 +74,11 @@ class Home extends AbstractView
 
     tabView.display();
     tabView.createTab(project);
+
+    // test
+    let newProject = new Project();
+    newProject.name = 'Hello World';
+    tabView.createTab(newProject);
   }
 
   quitApp(event)
