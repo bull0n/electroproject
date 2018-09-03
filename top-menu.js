@@ -110,4 +110,6 @@ class TopMenu
   }
 }
 
+TopMenu.instance = null;
+
 module.exports = TopMenu;
