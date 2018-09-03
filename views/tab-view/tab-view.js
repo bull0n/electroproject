@@ -125,7 +125,7 @@ function closeTab(elementTab)
 
   if(listTab.length <= 0)
   {
-    let Home = require('./views/home/home.js');
+    let Home = require('../../views/home/home.js');
     let home = new Home($('#content-container'));
 
     home.display();
