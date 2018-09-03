@@ -24,7 +24,7 @@ class ListTasks extends AbstractTabContentView
             <th scope="col">From</th>
             <th scope="col">To</th>
             <th scope="col">Finished ?</th>
-            <th scope="col">Controls</th>
+            <th scope="col" class="action-container-task">Controls</th>
           </tr>
         </thead>
         <tbody>
@@ -60,8 +60,6 @@ class ListTasks extends AbstractTabContentView
         }
       }
 
-
-
       htmlText += `<tr>
         <th scope="row">${task.name}</th>
         <td>${task.inCharge !== undefined ? task.inCharge.name : ''}</td>
@@ -74,9 +72,9 @@ class ListTasks extends AbstractTabContentView
             <label class="custom-control-label" for="customCheckDisabled">Finished</label>
           </div>
         </td>
-        <td>
-          <button class="btn btn-link btn-edit-task ${this.prefix}-edit" data-task-index="${i}"><i class="fas fa-edit"></i></button>
-          <button class="btn btn-link btn-delete-task ${this.prefix}-delete" data-task-index="${i}"><i class="fas fa-trash"></i></button>
+        <td class="action-container-task">
+          <button class="btn btn-link btn-action-task ${this.prefix}-edit" data-task-index="${i}"><i class="fas fa-edit"></i></button>
+          <button class="btn btn-link btn-action-task ${this.prefix}-delete" data-task-index="${i}"><i class="fas fa-trash"></i></button>
         </td>
       </tr>`;
     }
@@ -129,8 +127,10 @@ class ListTasks extends AbstractTabContentView
 
       Modal.show(title, formTask.display(), function()
       {
-        FormTask.save(formTask, isEdit);
+        let result = FormTask.save(formTask, isEdit);
         refreshTabContent(taskView.prefix);
+
+        return result;
       });
     }
 

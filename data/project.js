@@ -50,7 +50,7 @@ class Project
     {
       for(let i = 0; i < this.tasks.length; i++)
       {
-        if(this.tasks[i].inCharge === this.team[iCurrentMember] || iCurrentMember === undefined && this.tasks[i].inCharge === undefined)
+        if(this.tasks[i].inCharge.equals(this.team[iCurrentMember]) || iCurrentMember === undefined && this.tasks[i].inCharge === undefined)
         {
           tasks.push(this.tasks[i]);
         }
@@ -75,7 +75,7 @@ class Project
 
     for(let i = 0; i < this.tasks.length; i++)
     {
-      if(this.tasks[i].inCharge === member)
+      if(this.tasks[i].inCharge.equals(member))
       {
         tasks.push(this.tasks[i]);
       }

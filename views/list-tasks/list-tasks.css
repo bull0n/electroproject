@@ -4,7 +4,12 @@
   margin-right: 35px;
 }
 
-.btn-delete-task
+.btn-action-task
 {
   padding: 0;
+  margin-right: 5px;
+}
+.action-container-task
+{
+  text-align: right;
 }
