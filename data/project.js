@@ -96,6 +96,47 @@ class Project
 
     return undefined;
   }
+
+  // This function convert generic object to a typed object (generic object --> project object)
+  static revive(projectObject)
+  {
+    let realProject = new Project();
+    realProject.name = projectObject.name;
+    realProject.filename = projectObject.filename;
+    realProject.team = projectObject.team;
+    realProject.tasks = projectObject.tasks;
+
+    for(let i = 0;i < realProject.team.length; i++)
+    {
+      let memberObject = realProject.team[i];
+      let realMember = new Member(memberObject.color, memberObject.name);
+      realProject.team[i] = realMember;
+    }
+
+    for(let i = 0;i < realProject.tasks.length; i++)
+    {
+      let taskObject= realProject.tasks[i];
+      let realTask = new Task();
+
+      realTask.name = taskObject.name;
+      realTask.from = new Date(taskObject.from);
+      realTask.to = new Date(taskObject.to);
+      realTask.finished = taskObject.finished;
+      realTask.workingOn = taskObject.workingOn;
+      realTask.inCharge = new Member(taskObject.inCharge.color, taskObject.inCharge.name);
+
+      for(let j = 0;j < realTask.workingOn.length; j++)
+      {
+        let memberObject = realTask.workingOn[j];
+        let realMember = new Member(memberObject.color, memberObject.name);
+        realTask.workingOn[j] = realMember;
+      }
+
+      realProject.tasks[i] = realTask;
+    }
+
+    return realProject;
+  }
 }
 
 module.exports.Project = Project;
