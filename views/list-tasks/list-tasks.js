@@ -112,7 +112,7 @@ class ListTasks extends AbstractTabContentView
       let FormTask = require('../form-task/form-task.js');
 
       let formTask = undefined;
-      let isEdit = $(event.currentTarget).hasClass('btn-edit-task');
+      let isEdit = $(event.currentTarget).hasClass('btn-action-task');
 
       if(isEdit)
       {
