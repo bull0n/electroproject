@@ -5,29 +5,7 @@ class TopMenu
 {
   constructor()
   {
-    this.prepareFilesHistory();
     this.update();
-  }
-
-  prepareFilesHistory()
-  {
-    let filesHistory = new FilesHistory();
-    let fileSystem = require('fs');
-
-    try
-    {
-      filesHistory.load();
-    }
-    catch (exception)
-    {
-      console.log("No history !");
-    }
-    finally
-    {
-      // nothing
-    }
-
-    this.filesHistory = filesHistory;
   }
 
   update()
@@ -81,9 +59,9 @@ class TopMenu
       let openProjectClickEvent = function(item, focusedWindow) { TopMenu.getInstance().openProject(item.label);};
       let recentsFilesSubMenu = [];
 
-      for(let i = this.filesHistory.getLength()-1;i >= 0; i--)
+      for(let i = FilesHistory.getInstance().getLength()-1;i >= 0; i--)
       {
-        let filePath = this.filesHistory.getFile(i);
+        let filePath = FilesHistory.getInstance().getFile(i);
         let filePathMenuItem = {label:filePath, click: openProjectClickEvent};
         recentsFilesSubMenu.push(filePathMenuItem);
       }
@@ -165,7 +143,7 @@ class TopMenu
 
   addToHistory(path)
   {
-    this.filesHistory.addFile(path);
+    FilesHistory.getInstance().addFile(path);
   }
 
   save(project)

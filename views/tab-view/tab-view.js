@@ -1,13 +1,9 @@
 let AbstractView = require('../../abstract-view-class.js');
-
-var listTab = [];
+const {session} = require('electron');
+const Tab = require('./tab.js');
 
 const ACTIVE_TAB_CLASS = ' active-tab';
 const ACTIVE_CONTENT_CLASS = ' active-content';
-const TAB_CLASS = ' tab';
-const CONTENT_CLASS = ' tab-content';
-const ID_TAB_PREFIX = 'tab-';
-const ID_CONTENT_PREFIX = 'content-';
 
 class TabView extends AbstractView
 {
@@ -20,45 +16,21 @@ class TabView extends AbstractView
 
   createTab(project)
   {
-    let tag = project.name.toLowerCase();
-    tag = tag.replace(' ', '-');
-    tag += '_' + Date.now();          // Use timestamp for unique node name
+    let tab = new Tab(this.ulTabs, this.divsContent, project);
+    tab.display();
 
-    let li = document.createElement('li');
-    let textNode = document.createTextNode(project.name);
-    li.appendChild(textNode);
+    TabView.listTabs.push(tab);
 
-    let iconNode = document.createElement('i');
-    iconNode.className = 'fas fa-times';
-    li.appendChild(iconNode);
+    $('#' + tab.getIdTab()).click(() => {
+      makeActive(tab);
+    });
 
-    $(iconNode).click(function(event) {
-      closeTab($(event.currentTarget).parent());
+    $(`#${tab.getIdTab()} i`).click(() => {
+      closeTab(tab);
       event.stopPropagation();
     });
 
-    li.className = TAB_CLASS;
-    li.id = ID_TAB_PREFIX + tag;
-
-    $(li).click(function(event) {
-      makeActive(event.currentTarget.id);
-    });
-
-    this.ulTabs.appendChild(li);
-
-    let divContent = document.createElement('div');
-    divContent.className = 'tab-content';
-    divContent.id = 'content-' + tag;
-    this.divsContent.appendChild(divContent);
-
-    let TabContent = require('../tab-content/tab-content.js');
-
-    let tabContent = new TabContent($(divContent), project, tag);
-    tabContent.display();
-
-    listTab.push(tag);
-
-    $(li).click();
+    $('#'+tab.getIdTab()).click();
   }
 
   // add the html to the dom
@@ -101,34 +73,34 @@ class TabView extends AbstractView
   }
 }
 
+TabView.listTabs = [];
 TabView.instance = undefined;
 
 //make the active tab
-function makeActive(idTab)
+function makeActive(tab)
 {
-  for (i = 0; i < listTab.length; i++)
+  for (i = 0; i < TabView.listTabs.length; i++)
   {
-    let tab = document.getElementById((ID_TAB_PREFIX + listTab[i]).toLowerCase());
-    tab.className = tab.className.replace(ACTIVE_TAB_CLASS, '');
+    let tabElement = document.getElementById(tab.getIdTab());
+    tabElement.className = tabElement.className.replace(ACTIVE_TAB_CLASS, '');
 
-    let content = document.getElementById((ID_CONTENT_PREFIX + listTab[i]).toLowerCase());
+    let content = document.getElementById(tab.getIdContent());
     content.className = content.className.replace(ACTIVE_CONTENT_CLASS, '');
   }
 
-  document.getElementById(idTab).className += ACTIVE_TAB_CLASS;
-  let idContent = idTab.replace(ID_TAB_PREFIX, ID_CONTENT_PREFIX);
-  document.getElementById(idContent).className += ACTIVE_CONTENT_CLASS;
+  document.getElementById(tab.getIdTab()).className += ACTIVE_TAB_CLASS;
+  document.getElementById(tab.getIdContent()).className += ACTIVE_CONTENT_CLASS;
 }
 
-function closeTab(elementTab)
+function closeTab(tab)
 {
-  let idTab = $(elementTab).attr('id').replace('tab-', '');
-  let iTab = listTab.indexOf(idTab)
-  listTab.splice(iTab, 1);
-  $(`#${ID_TAB_PREFIX}${idTab}`).remove();
-  $(`#${ID_CONTENT_PREFIX}${idTab}`).remove();
+  let iTab = TabView.listTabs.indexOf(tab)
+  TabView.listTabs.splice(iTab, 1);
 
-  if(listTab.length <= 0)
+  $(`#${tab.getIdTab()}`).remove();
+  $(`#${tab.getIdContent()}`).remove();
+
+  if(TabView.listTabs.length <= 0)
   {
     let Home = require('../../views/home/home.js');
     let home = new Home($('#content-container'));
@@ -138,12 +110,12 @@ function closeTab(elementTab)
   }
   else
   {
-    if(iTab == listTab.length)
+    if(iTab ==   TabView.listTabs.length)
     {
       iTab--;
     }
 
-    $('#' + ID_TAB_PREFIX + listTab[iTab]).click();
+    $('#' + TabView.listTabs[iTab].getIdTab()).click();
   }
 }
 

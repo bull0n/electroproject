@@ -1,4 +1,5 @@
 const {app, BrowserWindow} = require('electron');
+const FilesHistory = require('./files-history.js');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -13,9 +14,15 @@ function createWindow () {
       nodeIntegration: true
     }
   });
-  //win.setMenu(null);
 
-  // and load the index.html of the app.
+  try
+  {
+    FilesHistory.getInstance().load();
+  }
+  catch (exception)
+  {
+    console.log("No history !");
+  }
   win.loadFile('index.html');
 
   // Emitted when the window is closed.
