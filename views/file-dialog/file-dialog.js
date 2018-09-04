@@ -20,27 +20,21 @@ class FileDialog
       SerializerTool.serializeToFile(project, path);
       project.fileName = path;
     }
-    else
-    {
-      throw "The user canceled the saving...";
-    }
   }
 
   static open(directory, parentWindow = null)
   {
     let path = dialog.showOpenDialog(parentWindow, {title:"Open", defaultPath:directory, filters: [
       { name: 'Electron Project File', extensions: ['epr'] },
-    ]})[0];
-    let project = null;
+    ]});
 
-    if(path)
+    let project = undefined;
+
+    if(path !== undefined)
     {
+      path = path[0];
       project = SerializerTool.unserializeFromFile(path, Project.revive);
       project.fileName = path;
-    }
-    else
-    {
-        throw "The user canceled the loading...";
     }
 
     return project;

@@ -78,14 +78,18 @@ class TopMenu
   {
     let directory = app.getPath('documents');
     let project = FileDialog.open(directory, BrowserWindow.getFocusedWindow());
-    let tabViewExists = TabView.instance !== null;
-    let tabView = TabView.getInstance();
 
-    if(!tabViewExists)
+    if(project !== undefined)
     {
-      tabView.display();
+      let tabViewExists = TabView.instance !== null;
+      let tabView = TabView.getInstance();
+
+      if(!tabViewExists)
+      {
+        tabView.display();
+      }
+      tabView.createTab(project);
     }
-    tabView.createTab(project);
   }
 
   quitApp()
