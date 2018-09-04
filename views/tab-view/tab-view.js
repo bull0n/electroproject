@@ -13,6 +13,7 @@ class TabView extends AbstractView
     super(element);
     this.ulTabs = undefined;
     this.divsContent = undefined;
+    this.focusedTab = undefined;
   }
 
   createTab(project)
@@ -23,6 +24,8 @@ class TabView extends AbstractView
     TabView.listTabs.push(tab);
 
     $('#' + tab.getIdTab()).click(() => {
+      this.focusedTab = tab;
+      console.log(this.focusedTab);
       makeActive(tab);
     });
 
@@ -37,6 +40,11 @@ class TabView extends AbstractView
     {
       FilesHistory.getInstance().addTab(project.fileName);
     }
+  }
+
+  getFocusedTab()
+  {
+    return this.focusedTab;
   }
 
   // add the html to the dom
