@@ -31,12 +31,12 @@ class TopMenu
             }
           },
           {
-            label: 'Recent files...',
+            label: 'Recents files...',
             submenu: []
           },
           {
             label: 'Quit',
-            role: 'Ctrl+q',
+            accelerator: 'Ctrl+q',
             click (item, focusedWindow)
             {
               TopMenu.getInstance().quitApp();
@@ -59,11 +59,14 @@ class TopMenu
 
       let openProjectClickEvent = function(item, focusedWindow) { TopMenu.getInstance().openProject(item.label);};
       let recentsFilesSubMenu = [];
+      const ACCELERATOR_PREFIX = 'ctrl+';
 
       for(let i = FilesHistory.getInstance().getLength()-1;i >= 0; i--)
       {
         let filePath = FilesHistory.getInstance().getFile(i);
-        let filePathMenuItem = {label:filePath, click: openProjectClickEvent};
+        let numberAcc = FilesHistory.getInstance().getLength() - i;
+        let recentFileAccelerator = ACCELERATOR_PREFIX + numberAcc;
+        let filePathMenuItem = {label:filePath, accelerator: recentFileAccelerator, click: openProjectClickEvent};
         recentsFilesSubMenu.push(filePathMenuItem);
       }
 
