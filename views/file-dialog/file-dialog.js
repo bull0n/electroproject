@@ -5,7 +5,7 @@ let {Project, Task, Member} = require("../../data/project.js");
 
 class FileDialog
 {
-  static saveAs(project, directory, parentWindow = null)
+  static saveAs(project, directory, parentWindow = undefined)
   {
     let path = dialog.showSaveDialog(parentWindow, {title:"Save as", defaultPath:directory, filters: [
       { name: 'Electron Project File', extensions: ['epr'] },
@@ -22,7 +22,7 @@ class FileDialog
     }
   }
 
-  static open(directory, parentWindow = null)
+  static open(directory, parentWindow = undefined)
   {
     let path = dialog.showOpenDialog(parentWindow, {title:"Open", defaultPath:directory, filters: [
       { name: 'Electron Project File', extensions: ['epr'] },
@@ -43,7 +43,7 @@ class FileDialog
     return project;
   }
 
-  static save(project, parentWindow = null)
+  static save(project, parentWindow = undefined)
   {
     let fileName = project.fileName;
     delete project.fileName;

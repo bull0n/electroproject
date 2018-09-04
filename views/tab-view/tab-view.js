@@ -92,7 +92,7 @@ class TabView extends AbstractView
 
   static getInstance()
   {
-    if(TabView.instance == null)
+    if(TabView.instance == undefined)
     {
       TabView.instance = new TabView($('#content-container'));
     }
@@ -101,7 +101,7 @@ class TabView extends AbstractView
   }
 }
 
-TabView.instance = null;
+TabView.instance = undefined;
 
 //make the active tab
 function makeActive(idTab)
@@ -133,6 +133,7 @@ function closeTab(elementTab)
     let Home = require('../../views/home/home.js');
     let home = new Home($('#content-container'));
 
+    TabView.instance = undefined;
     home.display();
   }
   else

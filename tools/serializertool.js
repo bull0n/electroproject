@@ -23,7 +23,7 @@ class SerializerTool
   static unserializeFromFile(filename, reviverFunc)
   {
     let fileSystem = require("fs");
-    let serializedObject = null;
+    let serializedObject = undefined;
 
     if(filename === "")
     {

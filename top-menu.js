@@ -97,13 +97,14 @@ class TopMenu
   newProject()
   {
     let currentInstance = TopMenu.instance;
-    let tabViewExists = TabView.instance !== null;
-    let tabView = TabView.getInstance();
+    let tabViewExists = TabView.instance !== undefined;
+
     let project = new Project();
 
     Modal.show('New project', currentInstance.getHTMLProjectNameForm(), function()
     {
       project.name = $('#txt_project_name').val();
+      let tabView = TabView.getInstance();
 
       if(!tabViewExists)
       {
@@ -113,11 +114,10 @@ class TopMenu
     });
   }
 
-  openProject(filePath = null)
+  openProject(filePath = undefined)
   {
-    let tabViewExists = TabView.instance !== null;
-    let tabView = TabView.getInstance();
-    let project = null;
+    let tabViewExists = TabView.instance !== undefined;
+    let project = undefined;
 
     if(typeof filePath != 'string')
     {
@@ -132,7 +132,7 @@ class TopMenu
 
     if(project !== undefined)
     {
-      let tabViewExists = TabView.instance !== null;
+      let tabViewExists = TabView.instance !== undefined;
       let tabView = TabView.getInstance();
 
       if(!tabViewExists)
@@ -175,7 +175,7 @@ class TopMenu
 
   static getInstance()
   {
-    if(TopMenu.instance == null)
+    if(TopMenu.instance == undefined)
     {
       TopMenu.instance = new TopMenu();
     }
@@ -184,6 +184,6 @@ class TopMenu
   }
 }
 
-TopMenu.instance = null;
+TopMenu.instance = undefined;
 
 module.exports = TopMenu;

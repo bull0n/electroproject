@@ -43,7 +43,7 @@ class FilesHistory
 
    getMenuItem()
    {
-     return null;
+     return undefined;
    }
 }
 
