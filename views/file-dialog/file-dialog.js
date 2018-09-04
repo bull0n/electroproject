@@ -50,6 +50,9 @@ class FileDialog
     if(fs.existsSync(fileName))
     {
       SerializerTool.serializeToFile(project, fileName);
+
+      let Modal = require('../modal/modal.js');
+      Modal.show('', 'File saved !', function() {});
     }
     else
     {
