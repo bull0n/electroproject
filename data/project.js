@@ -126,12 +126,12 @@ class Project
       realTask.to = new Date(taskObject.to);
       realTask.finished = taskObject.finished;
       realTask.workingOn = taskObject.workingOn;
-      realTask.inCharge = new Member(taskObject.inCharge.color, taskObject.inCharge.name);
+      realTask.inCharge = getMember(realProject.team, taskObject.inCharge.name, taskObject.inCharge.color);
 
       for(let j = 0;j < realTask.workingOn.length; j++)
       {
         let memberObject = realTask.workingOn[j];
-        let realMember = new Member(memberObject.color, memberObject.name);
+        let realMember = getMember(realProject.team, memberObject.name, memberObject.color);
         realTask.workingOn[j] = realMember;
       }
 
@@ -140,6 +140,19 @@ class Project
 
     return realProject;
   }
+}
+
+function getMember(members, name, color)
+{
+  for(let i = 0; i < members.length; i++)
+  {
+    if(members[i].name == name && members[i].color == color)
+    {
+      return members[i];
+    }
+  }
+  
+  return undefined;
 }
 
 module.exports.Project = Project;
