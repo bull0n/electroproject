@@ -119,7 +119,7 @@ class TopMenu
     let tabView = TabView.getInstance();
     let project = null;
 
-    if(filePath == null)
+    if(typeof filePath != 'string')
     {
       let directory = app.getPath('documents');
       project = FileDialog.open(directory, BrowserWindow.getFocusedWindow());
