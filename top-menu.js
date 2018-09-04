@@ -36,6 +36,22 @@ class TopMenu
             }
           },
           {
+            label: 'Save',
+            accelerator: 'Ctrl+s',
+            click (item, focusedWindow)
+            {
+              if(TabView.getInstance().getFocusedTab() == undefined)
+              {
+                dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {title:"Error", message:"Create or open a project first !", buttons: ["Ok"]});
+              }
+              else
+              {
+                let project = TabView.getInstance().getFocusedTab().project;
+                TopMenu.getInstance().save(project);
+              }
+            }
+          },
+          {
             label: 'Recents files...',
             submenu: []
           },
@@ -74,8 +90,7 @@ class TopMenu
         let filePathMenuItem = {label:filePath, accelerator: recentFileAccelerator, click: openProjectClickEvent};
         recentsFilesSubMenu.push(filePathMenuItem);
       }
-
-      template[0].submenu[2].submenu = recentsFilesSubMenu;
+      template[0].submenu[3].submenu = recentsFilesSubMenu;
 
       let menu = Menu.buildFromTemplate(template);
       Menu.setApplicationMenu(menu);
