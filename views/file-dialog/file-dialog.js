@@ -33,6 +33,9 @@ class FileDialog
     {
       project = SerializerTool.unserializeFromFile(path, Project.revive);
       project.fileName = path;
+
+      TopMenu.getInstance().addToHistory(path);
+      TopMenu.getInstance().update();
     }
     else
     {

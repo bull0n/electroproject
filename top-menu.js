@@ -81,7 +81,7 @@ class TopMenu
       let openProjectClickEvent = function(item, focusedWindow) { TopMenu.getInstance().openProject(item.label);};
       let recentsFilesSubMenu = [];
 
-      for(let i = 0;i < this.filesHistory.getLength(); i++)
+      for(let i = this.filesHistory.getLength()-1;i >= 0; i--)
       {
         let filePath = this.filesHistory.getFile(i);
         let filePathMenuItem = {label:filePath, click: openProjectClickEvent};
@@ -154,9 +154,9 @@ class TopMenu
     return htmlText;
   }
 
-  getFilesHistory()
+  addToHistory(path)
   {
-    return this.filesHistory;
+    this.filesHistory.addFile(path);
   }
 
   save(project)

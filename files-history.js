@@ -17,6 +17,7 @@ class FilesHistory
      }
 
      this.filePaths.push(filePath);
+     this.save();
    }
 
    getFile(index)
@@ -44,39 +45,6 @@ class FilesHistory
    {
      return null;
    }
-/*
-   static loadFileFromHistory(filePath)
-   {
-     let project = Home.loadFile(filePath);
-     let tabView = TabView.getInstance();
-
-     if(TabView.instance !== null)
-     {
-       tabView.display();
-     }
-
-     tabView.createTab(project);
-   }
-
-   getHTMLFilesHistory()
-   {
-     let path = require('path');
-     let htmlText = '';
-
-     if(1) // check existence
-     {
-       this.load();
-
-       for(let i = this.filePaths.length-1;i >= 0; i--)
-       {
-         let filePath = this.filePaths[i];
-         htmlText += `<a onclick="let Home = require('./views/home/home.js');Home.loadFileFromHistory('${filePath}'); return false;">${filePath}</a><br>`;
-       }
-     }
-     console.log(this.filePaths);
-     return htmlText;
-   }
-   */
 }
 
 module.exports = FilesHistory;
