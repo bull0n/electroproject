@@ -110,6 +110,7 @@ class TopMenu
       try
       {
         project = SerializerTool.unserializeFromFile(filePath, Project.revive);
+        project.fileName = filePath;
       }
       catch (exception)
       {

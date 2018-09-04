@@ -25,13 +25,29 @@ class FilesHistory
 
    addTab(filePath)
    {
-     this.history.tabHistory.push(filePath);
+     if(this.history.tabHistory.indexOf(filePath) === -1)
+     {
+       this.history.tabHistory.push(filePath);
+       this.save();
+     }
+   }
+
+   removeTab(filePath)
+   {
+     let iFilePath = this.history.tabHistory.indexOf(filePath);
+
+     if(iFilePath >= 0)
+     {
+       this.history.tabHistory.splice(iFilePath, 1);
+     }
+
      this.save();
    }
 
    resetTabHistory()
    {
      this.history.tabHistory = [];
+     this.save();
    }
 
    getTabHistory()

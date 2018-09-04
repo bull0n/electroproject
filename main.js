@@ -15,14 +15,6 @@ function createWindow () {
     }
   });
 
-  try
-  {
-    FilesHistory.getInstance().load();
-  }
-  catch (exception)
-  {
-    console.log("No history !");
-  }
   win.loadFile('index.html');
 
   // Emitted when the window is closed.

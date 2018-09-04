@@ -1,6 +1,7 @@
 let AbstractView = require('../../abstract-view-class.js');
 const {session} = require('electron');
 const Tab = require('./tab.js');
+const FilesHistory = require('../../files-history.js');
 
 const ACTIVE_TAB_CLASS = ' active-tab';
 const ACTIVE_CONTENT_CLASS = ' active-content';
@@ -31,6 +32,11 @@ class TabView extends AbstractView
     });
 
     $('#'+tab.getIdTab()).click();
+
+    if(project.fileName !== undefined)
+    {
+      FilesHistory.getInstance().addTab(project.fileName);
+    }
   }
 
   // add the html to the dom
@@ -100,6 +106,11 @@ function closeTab(tab)
   $(`#${tab.getIdTab()}`).remove();
   $(`#${tab.getIdContent()}`).remove();
 
+  if(tab.project.fileName !== undefined)
+  {
+    FilesHistory.getInstance().removeTab(tab.project.fileName);
+  }
+
   if(TabView.listTabs.length <= 0)
   {
     let Home = require('../../views/home/home.js');
@@ -110,7 +121,7 @@ function closeTab(tab)
   }
   else
   {
-    if(iTab ==   TabView.listTabs.length)
+    if(iTab == TabView.listTabs.length)
     {
       iTab--;
     }

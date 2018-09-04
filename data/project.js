@@ -6,7 +6,6 @@ class Project
   constructor()
   {
     this.name = '';
-    this.filename = '';
     this.team = [];
     this.tasks = [];
   }
@@ -102,7 +101,6 @@ class Project
   {
     let realProject = new Project();
     realProject.name = projectObject.name;
-    realProject.filename = projectObject.filename;
     realProject.team = projectObject.team;
     realProject.tasks = projectObject.tasks;
 
