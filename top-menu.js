@@ -1,5 +1,6 @@
 const FileDialog = require("./views/file-dialog/file-dialog.js");
 const FilesHistory = require('./files-history.js');
+const {dialog} = require('electron').remote;
 
 class TopMenu
 {
@@ -105,7 +106,19 @@ class TopMenu
     else
     {
       let SerializerTool = require('./tools/serializertool.js');
-      project = SerializerTool.unserializeFromFile(filePath, Project.revive);
+
+      try
+      {
+        project = SerializerTool.unserializeFromFile(filePath, Project.revive);
+      }
+      catch (exception)
+      {
+        dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {title:"Error", message:"The file does not exist !", buttons: ["Ok"]});
+      }
+      finally
+      {
+        // nothing
+      }
     }
 
     if(project !== undefined)
