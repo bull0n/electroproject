@@ -7,7 +7,9 @@ class FileDialog
 {
   static saveAs(project, directory, parentWindow = null)
   {
-    let path = dialog.showSaveDialog(parentWindow, {title:"Save as", defaultPath:directory});
+    let path = dialog.showSaveDialog(parentWindow, {title:"Save as", defaultPath:directory, filters: [
+      { name: 'Electron Project File', extensions: ['epr'] },
+    ]});
 
     if(path)
     {
@@ -26,7 +28,9 @@ class FileDialog
 
   static open(directory, parentWindow = null)
   {
-    let path = dialog.showOpenDialog(parentWindow, {title:"Open", defaultPath:directory})[0];
+    let path = dialog.showOpenDialog(parentWindow, {title:"Open", defaultPath:directory, filters: [
+      { name: 'Electron Project File', extensions: ['epr'] },
+    ]})[0];
     let project = null;
 
     if(path)
