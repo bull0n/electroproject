@@ -2,7 +2,7 @@ let SerializerTool = require('./tools/serializertool.js');
 
 class FilesHistory
 {
-  constructor(filename = 'files-history-data', maxFiles = 3)
+  constructor(filename = 'files-history-data', maxFiles = 5)
   {
     this.filenameHistory = filename;
     this.filePaths = [];
@@ -43,7 +43,7 @@ class FilesHistory
 
    getMenuItem()
    {
-     return undefined;
+     return null;
    }
 }
 
