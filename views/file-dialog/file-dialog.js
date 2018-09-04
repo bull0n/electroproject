@@ -2,6 +2,7 @@
 const {dialog} = require('electron').remote;
 let SerializerTool = require('../../tools/serializertool.js');
 let {Project, Task, Member} = require("../../data/project.js");
+const TabView = require('../tab-view/tab-view.js');
 
 class FileDialog
 {
@@ -33,6 +34,15 @@ class FileDialog
     if(path !== undefined)
     {
       path = path[0];
+
+      for(let i = 0; i < TabView.listTabs.length; i++)
+      {
+        if(TabView.listTabs[i].project.fileName === path)
+        {
+          return undefined;
+        }
+      }
+
       project = SerializerTool.unserializeFromFile(path, Project.revive);
       project.fileName = path;
 

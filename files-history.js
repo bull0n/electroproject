@@ -18,8 +18,14 @@ class FilesHistory
      {
        this.history.fileHistory.shift();
      }
+     let iFilePath = this.history.fileHistory.indexOf(filePath);
 
-     this.history.fileHistory.push(filePath);
+     if(iFilePath != -1)
+     {
+       this.history.fileHistory.splice(iFilePath, 1);
+     }
+
+     this.history.fileHistory.unshift(filePath);
      this.save();
    }
 
