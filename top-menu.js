@@ -1,13 +1,36 @@
 const FileDialog = require("./views/file-dialog/file-dialog.js");
+const FilesHistory = require('./files-history.js');
 
 class TopMenu
 {
   constructor()
   {
-   this.create();
+    this.prepareFilesHistory();
+    this.update();
   }
 
-  create()
+  prepareFilesHistory()
+  {
+    let filesHistory = new FilesHistory();
+    let fileSystem = require('fs');
+
+    try
+    {
+      filesHistory.load();
+    }
+    catch (exception)
+    {
+      console.log("No history !");
+    }
+    finally
+    {
+      // nothing
+    }
+
+    this.filesHistory = filesHistory;
+  }
+
+  update()
   {
     let template = [{
         label: 'File',
@@ -27,6 +50,10 @@ class TopMenu
             {
               TopMenu.getInstance().openProject();
             }
+          },
+          {
+            label: 'Recent files...',
+            submenu: []
           },
           {
             label: 'Quit',
@@ -51,8 +78,20 @@ class TopMenu
       }
       ];
 
-      let menu = Menu.buildFromTemplate(template)
-      Menu.setApplicationMenu(menu)
+      let openProjectClickEvent = function(item, focusedWindow) { TopMenu.getInstance().openProject(item.label);};
+      let recentsFilesSubMenu = [];
+
+      for(let i = this.filesHistory.getLength()-1;i >= 0; i--)
+      {
+        let filePath = this.filesHistory.getFile(i);
+        let filePathMenuItem = {label:filePath, click: openProjectClickEvent};
+        recentsFilesSubMenu.push(filePathMenuItem);
+      }
+
+      template[0].submenu[2].submenu = recentsFilesSubMenu;
+
+      let menu = Menu.buildFromTemplate(template);
+      Menu.setApplicationMenu(menu);
   }
 
   newProject()
@@ -74,10 +113,22 @@ class TopMenu
     });
   }
 
-  openProject()
+  openProject(filePath = null)
   {
-    let directory = app.getPath('documents');
-    let project = FileDialog.open(directory, BrowserWindow.getFocusedWindow());
+    let tabViewExists = TabView.instance !== null;
+    let tabView = TabView.getInstance();
+    let project = null;
+
+    if(filePath == null)
+    {
+      let directory = app.getPath('documents');
+      project = FileDialog.open(directory, BrowserWindow.getFocusedWindow());
+    }
+    else
+    {
+      let SerializerTool = require('./tools/serializertool.js');
+      project = SerializerTool.unserializeFromFile(filePath, Project.revive);
+    }
 
     if(project !== undefined)
     {
@@ -88,7 +139,10 @@ class TopMenu
       {
         tabView.display();
       }
-      tabView.createTab(project);
+
+      $(document).ready(function(){
+        tabView.createTab(project);
+      });
     }
   }
 
@@ -107,6 +161,11 @@ class TopMenu
     `;
 
     return htmlText;
+  }
+
+  addToHistory(path)
+  {
+    this.filesHistory.addFile(path);
   }
 
   save(project)
