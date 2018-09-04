@@ -28,9 +28,10 @@ class TabContent extends AbstractView
     addView(this.prefix, 'Team', '<i class="fas fa-users"></i>', ListMembers, project);
 
     addAction(this.prefix, 'Save', '<i class="fas fa-save"></i>', function() {
-      const {app} = require('electron').remote; // ??
-      let directory = app.getPath('documents');
-      FileDialog.saveAs(project, directory); // parent should be passed but can't get the global win ...
+      // const {app} = require('electron').remote; // ??
+      // let directory = app.getPath('documents');
+      // FileDialog.saveAs(project, directory); // parent should be passed but can't get the global win ...
+      FileDialog.save(project);
     });
 
     $('#'+ views[this.prefix][0].getIdButton()).click();

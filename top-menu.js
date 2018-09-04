@@ -159,6 +159,11 @@ class TopMenu
     return this.filesHistory;
   }
 
+  save(project)
+  {
+    FileDialog.save(project);
+  }
+
   static getInstance()
   {
     if(TopMenu.instance == null)

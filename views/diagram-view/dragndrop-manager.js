@@ -84,6 +84,7 @@ class DragNDropManager
     this.elementPushed = undefined;
     this.originalWidth = 0;
     this.originalMargin = 0;
+    $('.tooltip').tooltip('dispose');
   }
 
   mouseMove(event)

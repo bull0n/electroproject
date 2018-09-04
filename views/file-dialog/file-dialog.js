@@ -11,7 +11,12 @@ class FileDialog
 
     if(path)
     {
+      if(project.fileName !== undefined)
+      {
+        delete project.fileName;
+      }
       SerializerTool.serializeToFile(project, path);
+      project.fileName = path;
     }
     else
     {
@@ -27,6 +32,7 @@ class FileDialog
     if(path)
     {
       project = SerializerTool.unserializeFromFile(path, Project.revive);
+      project.fileName = path;
     }
     else
     {
@@ -34,6 +40,26 @@ class FileDialog
     }
 
     return project;
+  }
+
+  static save(project, parentWindow = null)
+  {
+    let fileName = project.fileName;
+    delete project.fileName;
+
+    let fs = require("fs");
+
+    if(fs.existsSync(fileName))
+    {
+      SerializerTool.serializeToFile(project, fileName);
+    }
+    else
+    {
+      const {app} = require('electron').remote;
+      FileDialog.saveAs(project, app.getPath('documents'), parentWindow);
+    }
+
+    project.fileName = fileName;
   }
 }
 
