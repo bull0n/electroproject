@@ -37,8 +37,8 @@ class TabView extends AbstractView
       event.stopPropagation();
     });
 
-    li.className = 'tab';
-    li.id = 'tab-' + tag;
+    li.className = TAB_CLASS;
+    li.id = ID_TAB_PREFIX + tag;
 
     $(li).click(function(event) {
       makeActive(event.currentTarget.id);
@@ -58,7 +58,7 @@ class TabView extends AbstractView
 
     listTab.push(tag);
 
-    makeActive(li.id);
+    $(li).click();
   }
 
   // add the html to the dom
@@ -142,7 +142,7 @@ function closeTab(elementTab)
       iTab--;
     }
 
-    makeActive(ID_TAB_PREFIX + listTab[iTab]);
+    $('#' + ID_TAB_PREFIX + listTab[iTab]).click();
   }
 }
 

@@ -58,6 +58,7 @@ class DiagramView extends AbstractTabContentView
     this.addEvent();
 
     this.dragndrop.display();
+    $('[data-toggle="tooltip"]').tooltip();
   }
 
   // build the html for every tasks
@@ -72,6 +73,8 @@ class DiagramView extends AbstractTabContentView
       let task = tasks[i];
       let daysFromStart = Math.floor((task.from - this.project.from()) / MS_IN_DAYS);
 
+      let peopleWorkingOnText = this.buildWorkingOnList(task.workingOn);
+
       htmlTasks += `
       <div class="row-planning task ${this.prefix}-task" id="${this.prefix}-${task.name.toLowerCase()}" data-key-task="${task.key}">
         <div class="task-name planning-label">
@@ -81,7 +84,16 @@ class DiagramView extends AbstractTabContentView
           ${task.inCharge !== undefined ? task.inCharge.name : ''}
         </div>
         <div class="period-container">
-          <div class="period" style="width: ${(task.getLengthInDays()+1) * this.WIDTH_DAY}px; margin-left: ${daysFromStart * this.WIDTH_DAY}px; background-color: ${task.inCharge !== undefined ? task.inCharge.color : 'DeepSkyBlue'}">
+          <div
+            class="period"
+            style="width: ${(task.getLengthInDays()+1) * this.WIDTH_DAY}px; margin-left: ${daysFromStart * this.WIDTH_DAY}px; background-color: ${task.inCharge !== undefined ? task.inCharge.color : 'DeepSkyBlue'}"
+            data-toggle="tooltip"
+            data-html="true"
+            title="From : ${task.from.toLocaleDateString()}<br>
+                   To : ${task.to.toLocaleDateString()}
+                   ${peopleWorkingOnText != '' ? '<br>People working on it : <br>' + peopleWorkingOnText : ''}
+                   ${task.finished ? '<br>Finished' : ''}"
+          >
           </div>
         </div>
       </div>`;
@@ -158,7 +170,7 @@ class DiagramView extends AbstractTabContentView
       this.setSeparatorHeight();
     });
 
-    $(`#${this.prefix}-${this.constructor.name.toLowerCase()}-btn`).click(() =>
+    $(`#${this.prefix}-${this.constructor.name.toLowerCase()}-btn, #tab-${this.prefix}`).click(() =>
     {
       this.setSeparatorHeight();
     });
@@ -200,6 +212,23 @@ class DiagramView extends AbstractTabContentView
     let height = $(`#${this.prefix}-diagram-container`).height() - $(`#${this.prefix}-diagram-container .row-planning:nth-child(2)`).height() - BORDER_THICKNESS;
 
     $(`#${this.prefix}-diagram-container .separator-container, #${this.prefix}-diagram.container .separator-planning`).height(height);
+  }
+
+  buildWorkingOnList(listMember)
+  {
+    let text = '';
+
+    for(let i = 0; i < listMember.length; i++)
+    {
+      text += listMember[i].name;
+
+      if(i < listMember.length - 1)
+      {
+        text += ', ';
+      }
+    }
+
+    return text;
   }
 }
 
