@@ -7,7 +7,9 @@ class FileDialog
 {
   static saveAs(project, directory, parentWindow = null)
   {
-    let path = dialog.showSaveDialog(parentWindow, {title:"Save as", defaultPath:directory});
+    let path = dialog.showSaveDialog(parentWindow, {title:"Save as", defaultPath:directory, filters: [
+      { name: 'Electron Project File', extensions: ['epr'] },
+    ]});
 
     if(path)
     {
@@ -18,28 +20,24 @@ class FileDialog
       SerializerTool.serializeToFile(project, path);
       project.fileName = path;
     }
-    else
-    {
-      throw "The user canceled the saving...";
-    }
   }
 
   static open(directory, parentWindow = null)
   {
-    let path = dialog.showOpenDialog(parentWindow, {title:"Open", defaultPath:directory})[0];
-    let project = null;
+    let path = dialog.showOpenDialog(parentWindow, {title:"Open", defaultPath:directory, filters: [
+      { name: 'Electron Project File', extensions: ['epr'] },
+    ]});
 
-    if(path)
+    let project = undefined;
+
+    if(path !== undefined)
     {
+      path = path[0];
       project = SerializerTool.unserializeFromFile(path, Project.revive);
       project.fileName = path;
 
       TopMenu.getInstance().addToHistory(path);
       TopMenu.getInstance().update();
-    }
-    else
-    {
-        throw "The user canceled the loading...";
     }
 
     return project;

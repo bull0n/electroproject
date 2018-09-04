@@ -130,11 +130,20 @@ class TopMenu
       project = SerializerTool.unserializeFromFile(filePath, Project.revive);
     }
 
-    if(!tabViewExists)
+    if(project !== undefined)
     {
-      tabView.display();
+      let tabViewExists = TabView.instance !== null;
+      let tabView = TabView.getInstance();
+
+      if(!tabViewExists)
+      {
+        tabView.display();
+      }
+
+      $(document).ready(function(){
+        tabView.createTab(project);
+      });
     }
-    tabView.createTab(project);
   }
 
   quitApp()
