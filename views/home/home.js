@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to display the home (3 buttons) and manage the event when button are pushed
+ */
+
 let SerializerTool = require('../../tools/serializertool.js');
 let AbstractView = require("../../abstract-view-class.js");
 let Project = require('../../data/project.js').Project;

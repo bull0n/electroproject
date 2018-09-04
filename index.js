@@ -17,8 +17,6 @@ const Modal = require('./views/modal/modal.js');
 const FilesHistory = require('./files-history.js');
 const Home = require('./views/home/home.js');
 
-TopMenu.getInstance();
-
 try
 {
   FilesHistory.getInstance().load();
@@ -27,6 +25,8 @@ catch (exception)
 {
   console.log("No history !");
 }
+
+TopMenu.getInstance();
 
 $(document).ready(function()
 {

@@ -1,3 +1,7 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class for a button to trigger an action (without view)
+ */
 class ButtonAction
 {
   constructor(name, prefix, icon)

@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to display the content of a tab (multiple view content(diagram, member, tasks))
+ */
+
 let AbstractView = require('../../abstract-view-class.js');
 let {Project, Task, Member} = require('../../data/project.js');
 let DiagramView = require('../diagram-view/diagram-view.js');

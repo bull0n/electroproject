@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to manage the menu at the top (quit, open, save, save as, ...)
+ */
+
 const FileDialog = require("./views/file-dialog/file-dialog.js");
 const FilesHistory = require('./files-history.js');
 const {dialog} = require('electron').remote;

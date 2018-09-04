@@ -1,10 +1,11 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to display a tabbed view
+ */
 let AbstractView = require('../../abstract-view-class.js');
 const {session} = require('electron');
 const Tab = require('./tab.js');
 const FilesHistory = require('../../files-history.js');
-
-const ACTIVE_TAB_CLASS = ' active-tab';
-const ACTIVE_CONTENT_CLASS = ' active-content';
 
 class TabView extends AbstractView
 {
@@ -34,12 +35,12 @@ class TabView extends AbstractView
       event.stopPropagation();
     });
 
-    $('#'+tab.getIdTab()).click();
-
     if(project.fileName !== undefined)
     {
       FilesHistory.getInstance().addTab(project.fileName);
     }
+
+    $('#'+tab.getIdTab()).click();
   }
 
   getFocusedTab()
@@ -90,15 +91,18 @@ class TabView extends AbstractView
 TabView.listTabs = [];
 TabView.instance = undefined;
 
+const ACTIVE_TAB_CLASS = ' active-tab';
+const ACTIVE_CONTENT_CLASS = ' active-content';
+
 //make the active tab
 function makeActive(tab)
 {
   for (i = 0; i < TabView.listTabs.length; i++)
   {
-    let tabElement = document.getElementById(tab.getIdTab());
+    let tabElement = document.getElementById(TabView.listTabs[i].getIdTab());
     tabElement.className = tabElement.className.replace(ACTIVE_TAB_CLASS, '');
 
-    let content = document.getElementById(tab.getIdContent());
+    let content = document.getElementById(TabView.listTabs[i].getIdContent());
     content.className = content.className.replace(ACTIVE_CONTENT_CLASS, '');
   }
 

@@ -1,3 +1,9 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Gantt diagram view
+ */
+
+
 let AbstractTabContentView = require('../../abstract-tab-content-view.js');
 let DragNDropManager = require('./dragndrop-manager.js');
 
