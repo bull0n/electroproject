@@ -137,6 +137,7 @@ class TopMenu
       }
       catch (exception)
       {
+        console.log(exception);
         dialog.showMessageBox(BrowserWindow.getFocusedWindow(), {title:"Error", message:"The file does not exist !", buttons: ["Ok"]});
       }
       finally

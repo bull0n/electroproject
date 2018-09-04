@@ -126,7 +126,10 @@ class Project
       realTask.to = new Date(taskObject.to);
       realTask.finished = taskObject.finished;
       realTask.workingOn = taskObject.workingOn;
-      realTask.inCharge = getMember(realProject.team, taskObject.inCharge.name, taskObject.inCharge.color);
+      if(taskObject.inCharge !== undefined)
+      {
+        realTask.inCharge = getMember(realProject.team, taskObject.inCharge.name, taskObject.inCharge.color);
+      }
 
       for(let j = 0;j < realTask.workingOn.length; j++)
       {
@@ -151,7 +154,7 @@ function getMember(members, name, color)
       return members[i];
     }
   }
-  
+
   return undefined;
 }
 
