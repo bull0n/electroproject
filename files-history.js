@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : File to manage the history of the last files opened
+ */
+
 let SerializerTool = require('./tools/serializertool.js');
 const electron = require('electron');
 

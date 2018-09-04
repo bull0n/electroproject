@@ -1,3 +1,7 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : class to manage a file, open, save and save as
+ */
 
 const {dialog} = require('electron').remote;
 let SerializerTool = require('../../tools/serializertool.js');

@@ -1,3 +1,7 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to display a list of member with some actions (add/edit/delete)
+ */
 // Imports
 let AbstractTabContentView = require('../../abstract-tab-content-view.js');
 let {Project, Task, Member} = require('../../data/project.js');

@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to represent a member
+ */
+ 
 class Member
 {
   constructor(color = '', name = '')

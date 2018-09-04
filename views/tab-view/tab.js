@@ -1,4 +1,7 @@
-
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class that represent a tab in the tab-view
+ */
 const TAB_CLASS = ' tab';
 const CONTENT_CLASS = ' tab-content';
 const ID_TAB_PREFIX = 'tab-';

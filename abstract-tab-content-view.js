@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Abstract class for a view in the tab-content class
+ */
+
 let AbstractView = require('./abstract-view-class.js');
 
 class AbstractTabContentView extends AbstractView

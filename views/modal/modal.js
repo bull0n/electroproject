@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to display a modal, content must be specified in Show
+ */
+
 class Modal
 {
   // add the html in elementTarget

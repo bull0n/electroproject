@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class that represent a project
+ */
+
 let Task = require('./task.js');
 let Member = require('./member.js');
 

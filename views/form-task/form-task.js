@@ -1,3 +1,9 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to display a form to add/edit a task
+ */
+
+
 let AbstractView = require('../../abstract-view-class.js');
 let Task = require('../../data/project.js').Task;
 

@@ -1,3 +1,7 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class to display a tabbed view
+ */
 let AbstractView = require('../../abstract-view-class.js');
 const {session} = require('electron');
 const Tab = require('./tab.js');

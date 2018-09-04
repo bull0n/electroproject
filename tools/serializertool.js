@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class for serializing object into JSON files
+ */
+
 Project = require('../data/project.js').Project;
 
 class SerializerTool

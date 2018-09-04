@@ -1,3 +1,8 @@
+/**
+ * @author : Malik Fleury, Bulloni Lucas
+ * @description : Class that represent a task
+ */
+
 const MS_IN_DAYS = 86400000;
 
 class Task
