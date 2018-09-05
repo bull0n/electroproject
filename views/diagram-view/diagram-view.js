@@ -95,7 +95,8 @@ class DiagramView extends AbstractTabContentView
             style="width: ${(task.getLengthInDays()+1) * this.WIDTH_DAY}px; margin-left: ${daysFromStart * this.WIDTH_DAY}px; background-color: ${task.inCharge !== undefined ? task.inCharge.color : 'DeepSkyBlue'}"
             data-toggle="tooltip"
             data-html="true"
-            title="From : ${task.from.toLocaleDateString()}<br>
+            title="${task.name}<br>
+                   From : ${task.from.toLocaleDateString()}<br>
                    To : ${task.to.toLocaleDateString()}
                    ${peopleWorkingOnText != '' ? '<br>People working on it : <br>' + peopleWorkingOnText : ''}
                    ${task.finished ? '<br>Finished' : ''}"
@@ -140,8 +141,9 @@ class DiagramView extends AbstractTabContentView
 
       Modal.show(title, formTask.display(), function()
       {
-        FormTask.save(formTask, false);
+        let result = FormTask.save(formTask, false);
         refreshTabContent(diagramView.prefix);
+        return result;
       });
     }
 

@@ -113,3 +113,10 @@
   float: right;
   margin-right: -7px;
 }
+
+.planning-label {
+  word-break: break-all;
+  word-wrap: break-word;
+  overflow: hidden;
+  line-height: 27px;
+}
